@@ -1,31 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { launchRocket, setRocketsLaunched } from '../store/rocketsSlice';
+import { RootState } from '../store/store';
 
 function ActionTab() {
-  const [rocketsLaunched, setRocketsLaunched] = useState(0);
+  const dispatch = useDispatch();
+  const rocketsLaunched = useSelector((state: RootState) => state.rockets.launched);
 
-  // Load the count from storage when the app loads
+  // You can decide where to load this value from, perhaps from a server or a local file
+  const initialRocketsLaunched = 0;
+
+  // Set the initial count from wherever you have stored it
   useEffect(() => {
-    const loadRocketsFromStorage = async () => {
-      const storedCount = await AsyncStorage.getItem('rocketsLaunched');
-      if (storedCount !== null) {
-        setRocketsLaunched(Number(storedCount));
-      }
-    };
-    loadRocketsFromStorage();
-  }, []);
+    dispatch(setRocketsLaunched(initialRocketsLaunched));
+  }, [dispatch]);
 
-  const launchRocket = async () => {
-    const newCount = rocketsLaunched + 1;
-    setRocketsLaunched(newCount);
-    await AsyncStorage.setItem('rocketsLaunched', String(newCount));
+  const handleLaunchRocket = () => {
+    dispatch(launchRocket());
   };
 
   return (
     <View style={styles.container}>
-      <Button title="Launch Rocket" onPress={launchRocket} />
+      <Button title="Launch Rocket" onPress={handleLaunchRocket} />
       <Text style={{ color: '#fff', marginTop: 20 }}>Rockets Launched: {rocketsLaunched}</Text>
       <StatusBar style="auto" />
     </View>
