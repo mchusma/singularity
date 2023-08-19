@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ActionTab from './src/screens/ActionTab';
-import LogTab from './src/screens/LogTab';
+import ActionTab from './src/screens/actionTab';
+import LogTab from './src/screens/logTab';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from './src/store/store';
