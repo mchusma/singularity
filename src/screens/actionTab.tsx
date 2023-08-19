@@ -9,13 +9,7 @@ function ActionTab() {
   const dispatch = useDispatch();
   const rocketsLaunched = useSelector((state: RootState) => state.rockets.launched);
 
-  // You can decide where to load this value from, perhaps from a server or a local file
   const initialRocketsLaunched = 0;
-
-  // Set the initial count from wherever you have stored it
-  useEffect(() => {
-    dispatch(setRocketsLaunched(initialRocketsLaunched));
-  }, [dispatch]);
 
   const handleLaunchRocket = () => {
     dispatch(launchRocket());
