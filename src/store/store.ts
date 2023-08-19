@@ -1,5 +1,5 @@
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
-import rocketsReducer from './rocketsSlice';
+import unitsReducer from './unitSlice'; // Updated import path
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistStore, persistReducer } from 'redux-persist';
 
@@ -9,7 +9,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  rockets: rocketsReducer,
+  units: unitsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
