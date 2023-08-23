@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { initialUnits } from './initialUnits';
 
 interface Unit {
   id: number;
@@ -8,38 +9,13 @@ interface Unit {
   requiredUnits: Array<{ unitId: number, quantity: number }>;
 }
 
-interface UnitsState {
+export interface UnitsState {
   units: Unit[];
 }
 
-const initialState: UnitsState = {
-  units: [
-    {
-      id: 1,
-      name: 'Rocket',
-      isVisible: true,
-      quantity: 0,
-      requiredUnits: []
-    },
-    {
-      id: 2,
-      name: 'Factory',
-      isVisible: false,
-      quantity: 0,
-      requiredUnits: [{ unitId: 1, quantity: 10 }]
-    },
-    {
-      id: 3,
-      name: 'FactoryEmitter',
-      isVisible: false,
-      quantity: 0,
-      requiredUnits: [{ unitId: 2, quantity: 10 }]
-    },  ]
-};
-
 const unitsSlice = createSlice({
   name: 'units',
-  initialState,
+  initialState: initialUnits,
   reducers: {
     updateUnitVisibility(state, action: PayloadAction<number>) {
       const unit = state.units.find(unit => unit.id === action.payload);
@@ -48,7 +24,7 @@ const unitsSlice = createSlice({
       }
     },
     clearUnits: (state) => {
-      return initialState;
+      return initialUnits;
     },
     addUnit: (state, action: PayloadAction<number>) => {
       try {
