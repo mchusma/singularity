@@ -5,6 +5,7 @@ import { View, StyleSheet } from 'react-native';
 function ActionTab() {
   return (
     <View style={styles.container}>
+      Some amazing units!
       <ActiveUnits />
     </View>
   );
