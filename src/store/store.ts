@@ -2,6 +2,7 @@ import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/
 import unitsReducer from './unitSlice'; // Updated import path
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistStore, persistReducer } from 'redux-persist';
+import logger from 'redux-logger';
 
 const persistConfig = {
   key: 'root',
@@ -18,7 +19,7 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware({
     serializableCheck: false,
-  }),
+  }).concat(logger), // Add logger middleware here
 });
 
 export type RootState = ReturnType<typeof store.getState>;

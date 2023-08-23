@@ -1,12 +1,20 @@
 import React from 'react';
-import Units from '../components/units';
-
-console.log('singularity2/singularity/src/screens/actionTab.tsx');
+import ActiveUnits from '../components/activeUnits';
+import { View, StyleSheet } from 'react-native';
 
 function ActionTab() {
   return (
-    <Units />
+    <View style={styles.container}>
+      <ActiveUnits />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#25292e', // Change this to your desired color
+  },
+});
 
 export default ActionTab;
