@@ -1,4 +1,5 @@
 import React from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ActionTab from './src/screens/actionTab';
@@ -23,3 +24,10 @@ export default function App() {
     </Provider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#25292e',
+  },
+});

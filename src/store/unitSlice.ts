@@ -1,26 +1,43 @@
-// unitSlice.ts
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { initialUnits } from './initialUnits';
 
-export const unitSlice = createSlice({
+interface Unit {
+  id: number;
+  name: string;
+  isVisible: boolean;
+  quantity: number;
+  requiredUnits: Array<{ unitId: number, quantity: number }>;
+}
+
+export interface UnitsState {
+  units: Unit[];
+}
+
+const unitsSlice = createSlice({
   name: 'units',
-  initialState: {
-    rocketsLaunched: 0,
-    factoriesBuilt: 0,
-    factoryEmittersBuilt: 0,
-  },
+  initialState: initialUnits,
   reducers: {
-    launchRocket: (state) => {
-      state.rocketsLaunched += 1;
+    updateUnitVisibility(state, action: PayloadAction<number>) {
+      const unit = state.units.find(unit => unit.id === action.payload);
+      if (unit) {
+        unit.isVisible = true;
+      }
     },
-    buildFactory: (state) => {
-      state.factoriesBuilt += 1;
+    clearUnits: (state) => {
+      return initialUnits;
     },
-    buildFactoryEmitter: (state) => { 
-      console.log('Before building factory emitter:', state.factoryEmittersBuilt);
-      state.factoryEmittersBuilt += 1;
+    addUnit: (state, action: PayloadAction<number>) => {
+      try {
+        const unit = state.units.find(unit => unit.id === action.payload);
+        if (unit) {
+          unit.quantity += 1;
+        }
+      } catch (error) {
+        console.error('Error in addUnit reducer:', error);
+      }
     },
   },
 });
 
-export const { launchRocket, buildFactory, buildFactoryEmitter } = unitSlice.actions;
-export default unitSlice.reducer;
+export const { updateUnitVisibility, addUnit, clearUnits } = unitsSlice.actions;
+export default unitsSlice.reducer;
