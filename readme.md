@@ -11,19 +11,13 @@ Run:
 
 This application is built using Expo and React Native, with Redux for state management and Redux Persist for storing the state between sessions. The application is structured around the concept of "units", which are entities that can be created and interact with each other.
 
-### Redux Store
+### Redux 
 
-The Redux store is set up in src/store/store.ts. It uses redux-persist to persist the state to AsyncStorage. The store is configured with the unitsReducer from src/store/unitSlice.ts.
-// src/store/store.ts
-const rootReducer = combineReducers({
-  units: unitsReducer,
-});
-
-### Redux Store
+#### Redux Store
 
 The Redux store is set up in src/store/store.ts. It uses redux-persist to persist the state to AsyncStorage. The store is configured with the unitsReducer from src/store/unitSlice.ts.
 
-### Redux Actions
+#### Redux Actions
 
 The application uses several Redux actions to manage the state of the units:
 
@@ -43,9 +37,17 @@ Unit {
   requiredUnits: Array<{ unitId: number, quantity: number }>;
 }
 
+### How To Add Units
+Units must be added in 2 places:
+- the store/initialUnits.ts file - This defines the initial state and any requirements of the units to appear/disappear
+- the units folder - adding a .tsx file for your unit defines how it works/looks (buttons, inputs, outputs, etc) This can be simple, like Rocket.tsx, or more complicated
+
 ### Action Tab
 
-The Action Tab is defined in src/screens/actionTab.tsx. It renders the ActiveUnits component, which in turn renders a list of active units. The active units are defined in src/components/activeUnits.tsx and include Factory, FactoryEmitter, and Rocket.
+This is where most things live. The Action Tab is defined in src/screens/actionTab.tsx. It renders the ActiveUnits component, which in turn renders a list of active units. The active units are defined in src/components/activeUnits.tsx and include Factory, FactoryEmitter, and Rocket.
+
+### Log Tab
+The Log Tab is something I'd like to see vertical instead of horizontal, less of tabs and more like expandable sections. But regardless, story elements populate here as you go.
 
 ### Units
 
