@@ -6,19 +6,19 @@ import { updateUnitQuantity } from '../store/unitSlice';
 import { styles } from '../components/styles'; 
 
 interface Unit {
-    id: number;
+    id: string;
     quantity: number;
   }
   
   function FactoryEmitter() {
     const dispatch = useDispatch();
-    const unitId = 3; // Replace with the actual unit ID you're looking for
+    const unitId = 'factoryEmitter'; // Replace with the actual unit ID you're looking for
     const factoryEmittersBuilt = useSelector((state: RootState) => state.units?.units?.find((unit) => unit.id === unitId));
   
     useEffect(() => {
       const intervalFactories = setInterval(() => {
         for (let i = 0; i < (factoryEmittersBuilt?.quantity || 0); i++) {
-            dispatch(updateUnitQuantity({ unitId: 2, quantityChange: 1 }));
+            dispatch(updateUnitQuantity({ unitId: 'factory', quantityChange: 1 }));
         }
       }, 10000);
   
@@ -32,7 +32,7 @@ interface Unit {
     <View style={styles.unitWrapper}>
       <View>
       <Text style={styles.text}>Factory Emitters Built: {factoryEmittersBuilt?.quantity || 0}</Text>        
-        <Button title="Build Factory Emitter" onPress={() => dispatch(updateUnitQuantity({ unitId: 3, quantityChange: 1 }))} />
+        <Button title="Build Factory Emitter" onPress={() => dispatch(updateUnitQuantity({ unitId: 'factoryEmitter', quantityChange: 1 }))} />
       </View>
     </View>
   );

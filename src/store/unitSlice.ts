@@ -2,11 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialUnits } from './initialUnits';
 
 export interface Unit {
-  id: number;
+  id: string;
   name: string;
+  order: number,
   isVisible: boolean;
   quantity: number;
-  requiredUnits: Array<{ unitId: number, quantity: number }>;
+  requiredUnits: Array<{ unitId: string, quantity: number }>;
+  level: number;
+  levelCost: number;
 }
 
 export interface UnitsState {
@@ -17,7 +20,7 @@ const unitsSlice = createSlice({
   name: 'units',
   initialState: initialUnits,
   reducers: {
-    updateUnitVisibility(state, action: PayloadAction<number>) {
+    updateUnitVisibility(state, action: PayloadAction<string>) {
       const unit = state.units.find(unit => unit.id === action.payload);
       if (unit) {
         unit.isVisible = true;
@@ -26,7 +29,7 @@ const unitsSlice = createSlice({
     resetGame: (state) => {
       return initialUnits;
     },
-    updateUnitQuantity: (state, action: PayloadAction<{ unitId: number, quantityChange: number }>) => {
+    updateUnitQuantity: (state, action: PayloadAction<{ unitId: string, quantityChange: number }>) => {
       try {
         const unit = state.units.find(unit => unit.id === action.payload.unitId);
         if (unit) {

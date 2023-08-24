@@ -3,6 +3,7 @@ import unitsReducer from './unitSlice'; // Updated import path
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import logger from 'redux-logger';
+import resourcesReducer from './resourceSlice';
 
 const persistConfig = {
   key: 'root',
@@ -11,6 +12,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   units: unitsReducer,
+  resources: resourcesReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
