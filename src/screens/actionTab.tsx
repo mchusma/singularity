@@ -1,11 +1,11 @@
 import React from 'react';
 import ActiveUnits from '../components/activeUnits';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 function ActionTab() {
   return (
     <View style={styles.container}>
-      Some amazing units!
+      <Text style={styles.text}>Your Units</Text>      
       <ActiveUnits />
     </View>
   );
@@ -14,7 +14,10 @@ function ActionTab() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#25292e', // Change this to your desired color
+    backgroundColor: '#25292e', 
+  },
+  text: {
+    color: '#FFFFFF', 
   },
 });
 
