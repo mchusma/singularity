@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Button, Text } from 'react-native';
 import { RootState } from '../store/store';
-import { addUnit } from '../store/unitSlice';
+import { updateUnitQuantity } from '../store/unitSlice';
 import { styles } from '../components/styles'; 
 
 interface Unit {
@@ -22,7 +22,7 @@ function Factory() {
   useEffect(() => {
     const intervalRockets = setInterval(() => {
       for (let i = 0; i < unitQuantity; i++) {
-        dispatch(addUnit(1));
+        dispatch(updateUnitQuantity({ unitId: 1, quantityChange: 1 }));
       }
     }, 1000);
 
@@ -35,7 +35,7 @@ function Factory() {
     <View style={styles.unitWrapper}> 
       <View>
         <Text style={styles.text}>Factories Built: {unitQuantity}</Text>        
-        <Button title="Build Factory" onPress={() => dispatch(addUnit(2))} />
+        <Button title="Build Factory" onPress={() => dispatch(updateUnitQuantity({ unitId: 2, quantityChange: 1 }))} />
       </View>
     </View>
   );

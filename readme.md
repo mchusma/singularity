@@ -21,7 +21,7 @@ The Redux store is set up in src/store/store.ts. It uses redux-persist to persis
 
 The application uses several Redux actions to manage the state of the units:
 
-- addUnit: This action is dispatched when a unit is built. It increments the quantity of the specified unit.
+- updateUnitQuantity: This action is dispatched when a unit is built. It increments the quantity of the specified unit. `dispatch(updateUnitQuantity({ unitId: 3, quantityChange: 1 }))`
 - updateUnitVisibility: This action is dispatched to make a unit visible in the UI.
 - resetGame: This action is dispatched to reset the state of the units to their initial state.
 

@@ -26,18 +26,18 @@ const unitsSlice = createSlice({
     resetGame: (state) => {
       return initialUnits;
     },
-    addUnit: (state, action: PayloadAction<number>) => {
+    updateUnitQuantity: (state, action: PayloadAction<{ unitId: number, quantityChange: number }>) => {
       try {
-        const unit = state.units.find(unit => unit.id === action.payload);
+        const unit = state.units.find(unit => unit.id === action.payload.unitId);
         if (unit) {
-          unit.quantity += 1;
+          unit.quantity += action.payload.quantityChange;
         }
       } catch (error) {
-        console.error('Error in addUnit reducer:', error);
+        console.error('Error in updateUnitQuantity reducer:', error);
       }
     },
   },
 });
 
-export const { updateUnitVisibility, addUnit, resetGame } = unitsSlice.actions;
+export const { updateUnitVisibility, updateUnitQuantity, resetGame } = unitsSlice.actions;
 export default unitsSlice.reducer;

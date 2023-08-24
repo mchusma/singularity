@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Button,Text } from 'react-native';
 import { RootState } from '../store/store';
-import { addUnit } from '../store/unitSlice';
+import { updateUnitQuantity } from '../store/unitSlice';
 import { styles } from '../components/styles'; 
 
 interface Unit {
@@ -18,7 +18,7 @@ function Rocket() {
   return (
     <View style={styles.unitWrapper}>
       <Text style={styles.text}>Rockets Built: {rocketsBuilt?.quantity || 0}</Text>        
-      <Button title="Build Rocket" onPress={() => dispatch(addUnit(1))} />
+      <Button title="Build Rocket" onPress={() => dispatch(updateUnitQuantity({ unitId: 1, quantityChange: 1 }))} />
     </View>
   );
 }
