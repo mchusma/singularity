@@ -6,6 +6,7 @@ import Rocket from '../units/Rocket';
 import { resetGame, updateUnitVisibility } from '../store/unitSlice';
 import { RootState, persistor } from '../store/store';
 import { Unit } from '../store/unitSlice';
+import ActiveUpgrades from '../components/ActiveUpgrades';
 
 const activeUnits = [Factory, FactoryEmitter, Rocket];
 

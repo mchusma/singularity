@@ -4,6 +4,7 @@ import { View, Button, Text } from 'react-native';
 import { RootState } from '../store/store';
 import { updateUnitQuantity } from '../store/unitSlice';
 import { styles } from '../components/styles'; 
+import { buildUnit } from './components/buildUnit';
 
 interface Unit {
     id: string;
@@ -32,7 +33,7 @@ interface Unit {
     <View style={styles.unitWrapper}>
       <View>
       <Text style={styles.text}>Factory Emitters Built: {factoryEmittersBuilt?.quantity || 0}</Text>        
-        <Button title="Build Factory Emitter" onPress={() => dispatch(updateUnitQuantity({ unitId: 'factoryEmitter', quantityChange: 1 }))} />
+        <Button title="Build Factory" onPress={buildUnit('factoryEmitter')} />
       </View>
     </View>
   );
