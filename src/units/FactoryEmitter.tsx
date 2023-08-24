@@ -38,4 +38,6 @@ interface Unit {
   );
 }
 
+FactoryEmitter.unitName = 'FactoryEmitter';
+
 export default FactoryEmitter;

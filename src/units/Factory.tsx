@@ -41,4 +41,6 @@ function Factory() {
   );
 }
 
+Factory.unitName = 'Factory';
+
 export default Factory;

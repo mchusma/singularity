@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialUnits } from './initialUnits';
 
-interface Unit {
+export interface Unit {
   id: number;
   name: string;
   isVisible: boolean;

@@ -23,4 +23,6 @@ function Rocket() {
   );
 }
 
+Rocket.unitName = 'Rocket';
+
 export default Rocket;

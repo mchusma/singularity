@@ -5,10 +5,11 @@ import FactoryEmitter from '../units/FactoryEmitter';
 import Rocket from '../units/Rocket';
 import { clearUnits, updateUnitVisibility } from '../store/unitSlice';
 import { RootState } from '../store/store';
+import { Unit } from '../store/unitSlice';
 
 const activeUnits = [Factory, FactoryEmitter, Rocket];
 
-const useUpdatedRef = (val) => {
+const useUpdatedRef = (val: any) => {
   const ref = useRef(val);
   useEffect(() => {
     ref.current = val;
@@ -25,15 +26,23 @@ const ActiveUnits = () => {
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            unitsRef.current.forEach(unit => {
+            unitsRef.current.forEach((unit: Unit) => {
                 if (!unit.isVisible) {
-                    const requirementsMet = unit.requiredUnits.every(requiredUnit => {
-                        const requiredUnitState = unitsRef.current.find(u => u.id === requiredUnit.unitId);
+                    interface RequiredUnit {
+                        unitId: number;
+                        quantity: number;
+                      }
+                      const requirementsMet = unit.requiredUnits.every((requiredUnit: RequiredUnit) => {
+                        const requiredUnitState = unitsRef.current.find((u: typeof unit) => u.id === requiredUnit.unitId);                        if (!requiredUnitState) {
+                            console.error(`Required unit with id ${requiredUnit.unitId} not found`);
+                        }
                         return requiredUnitState && requiredUnitState.quantity >= requiredUnit.quantity;
                     });
 
                     if (requirementsMet) {
                         dispatch(updateUnitVisibility(unit.id));
+                    } else {
+                        console.error(`Requirements not met for unit with id ${unit.id}`);
                     }
                 }
             });
@@ -43,14 +52,16 @@ const ActiveUnits = () => {
         return () => clearInterval(intervalId);
     }, [dispatch, unitsRef]);
 
-    const visibleUnitsWithState = activeUnits.map(Unit => {
+    const visibleUnitsWithState = activeUnits.map(UnitComponent => {
         // Find the corresponding unit in the Redux state
-        const unitState = units.find(unit => unit.name === Unit.name);
-        return { Unit, ...unitState };
+        const unitState = units.find(unit => unit.name === UnitComponent.unitName);
+        if (!unitState) {
+            console.error(`Unit with name ${UnitComponent.unitName} not found in state`);
+        }
+        return { UnitComponent, ...unitState };
     }).filter(unit => unit.isVisible);
     
-    const sortedVisibleUnits = visibleUnitsWithState.sort((a, b) => a.id - b.id).map(unit => unit.Unit);
-    
+    const sortedVisibleUnits = visibleUnitsWithState.sort((a, b) => (a.id || 0) - (b.id || 0)).map(unit => unit.UnitComponent);    
     return (
         <div>
             {sortedVisibleUnits.map((Unit, index) => <Unit key={index} />)}

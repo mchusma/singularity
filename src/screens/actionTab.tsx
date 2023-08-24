@@ -5,7 +5,7 @@ import { View, Text, StyleSheet } from 'react-native';
 function ActionTab() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Your Units</Text>      
+      <Text style={styles.text}>Unit List</Text>      
       <ActiveUnits />
     </View>
   );
