@@ -23,7 +23,7 @@ const unitsSlice = createSlice({
         unit.isVisible = true;
       }
     },
-    clearUnits: (state) => {
+    resetGame: (state) => {
       return initialUnits;
     },
     addUnit: (state, action: PayloadAction<number>) => {
@@ -39,5 +39,5 @@ const unitsSlice = createSlice({
   },
 });
 
-export const { updateUnitVisibility, addUnit, clearUnits } = unitsSlice.actions;
+export const { updateUnitVisibility, addUnit, resetGame } = unitsSlice.actions;
 export default unitsSlice.reducer;

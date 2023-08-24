@@ -23,7 +23,7 @@ The application uses several Redux actions to manage the state of the units:
 
 - addUnit: This action is dispatched when a unit is built. It increments the quantity of the specified unit.
 - updateUnitVisibility: This action is dispatched to make a unit visible in the UI.
-- clearUnits: This action is dispatched to reset the state of the units to their initial state.
+- resetGame: This action is dispatched to reset the state of the units to their initial state.
 
 ### Unit Structure
 

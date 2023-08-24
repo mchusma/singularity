@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Factory from '../units/Factory';
 import FactoryEmitter from '../units/FactoryEmitter';
 import Rocket from '../units/Rocket';
-import { clearUnits, updateUnitVisibility } from '../store/unitSlice';
-import { RootState } from '../store/store';
+import { resetGame, updateUnitVisibility } from '../store/unitSlice';
+import { RootState, persistor } from '../store/store';
 import { Unit } from '../store/unitSlice';
 
 const activeUnits = [Factory, FactoryEmitter, Rocket];
@@ -65,7 +65,11 @@ const ActiveUnits = () => {
     return (
         <div>
             {sortedVisibleUnits.map((Unit, index) => <Unit key={index} />)}
-            <button onClick={() => dispatch(clearUnits())}>Reset Game</button>
+            <button onClick={() => {
+                persistor.purge().then(() => {
+                    dispatch(resetGame());
+                });
+                }}>Reset Game</button>
         </div>
     );
 }
