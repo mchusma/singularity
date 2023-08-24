@@ -1,25 +1,23 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ActionTab from './src/screens/actionTab';
-import LogTab from './src/screens/logTab';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from './src/store/store';
-
-const Tab = createBottomTabNavigator();
+import ActionTab from './src/screens/actionTab';
+import LogTab from './src/screens/logTab';
 
 export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer>
-          <Tab.Navigator>
-            <Tab.Screen name="Action" component={ActionTab} />
-            <Tab.Screen name="Log" component={LogTab} />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.logTab}>
+            <LogTab />
+          </View>
+          <View style={styles.actionTab}>
+            <ActionTab />
+          </View>
+        </SafeAreaView>
       </PersistGate>
     </Provider>
   );
@@ -29,5 +27,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#25292e',
+  },
+  logTab: {
+    flex: 1,
+    backgroundColor: '#000000', // black background color
+  },
+  actionTab: {
+    flex: 9,
+    backgroundColor: '#333333', // dark grey background color
   },
 });
