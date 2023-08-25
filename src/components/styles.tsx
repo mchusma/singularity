@@ -11,7 +11,15 @@ export const styles = StyleSheet.create({
     borderColor: getRandomLightColor(),
     borderWidth: 1,
     padding: 5
-  }
+  },
+  buttonContainer: {
+    paddingBottom: 10,
+  },
+  resourceWrapper: {
+    borderColor: getRandomLightColor(),
+    borderWidth: 1,
+    padding: 5
+  },
 });
 
 function getRandomLightColor() {

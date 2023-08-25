@@ -29,15 +29,16 @@ const ActiveUnits = () => {
             unitsRef.current.forEach((unit: Unit) => {
                 if (!unit.isVisible) {
                     interface RequiredUnit {
-                        unitId: number;
+                        unitId: string;
                         quantity: number;
                       }
                       const requirementsMet = unit.requiredUnits.every((requiredUnit: RequiredUnit) => {
-                        const requiredUnitState = unitsRef.current.find((u: typeof unit) => u.id === requiredUnit.unitId);                        if (!requiredUnitState) {
-                            console.error(`Required unit with id ${requiredUnit.unitId} not found`);
+                        const requiredUnitState = unitsRef.current.find((u: Unit) => u.id === requiredUnit.unitId);
+                        if (!requiredUnitState) {
+                          console.error(`Required unit with id ${requiredUnit.unitId} not found`);
                         }
                         return requiredUnitState && requiredUnitState.quantity >= requiredUnit.quantity;
-                    });
+                      });
 
                     if (requirementsMet) {
                         dispatch(updateUnitVisibility(unit.id));
@@ -61,7 +62,7 @@ const ActiveUnits = () => {
         return { UnitComponent, ...unitState };
     }).filter(unit => unit.isVisible);
     
-    const sortedVisibleUnits = visibleUnitsWithState.sort((a, b) => (a.id || 0) - (b.id || 0)).map(unit => unit.UnitComponent);    
+    const sortedVisibleUnits = visibleUnitsWithState.sort((a, b) => (a.order || 0) - (b.order || 0)).map(unit => unit.UnitComponent);    
     return (
         <div>
             {sortedVisibleUnits.map((Unit, index) => <Unit key={index} />)}
@@ -69,7 +70,7 @@ const ActiveUnits = () => {
                 persistor.purge().then(() => {
                     dispatch(resetGame());
                 });
-                }}>Reset Game</button>
+                }}>Reset Units</button>
         </div>
     );
 }
