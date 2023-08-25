@@ -43,7 +43,6 @@ const ActiveUnits = () => {
                     if (requirementsMet) {
                         dispatch(updateUnitVisibility(unit.id));
                     } else {
-                        console.error(`Requirements not met for unit with id ${unit.id}`);
                     }
                 }
             });

@@ -34,7 +34,7 @@ export const initialUnits: UnitsState = {
         isApplied: false,
         resourceCostUpdate: [{ resourceId: 'money', quantity: 0.2 }],
         resourceCost: [{ unitId: 'rocket', quantity: 200 }],
-        requiredUnits: [{ unitId: 'partialReusable', quantity: 1 }],
+        requiredUnits: [],
         requiredResources: [{ unitId: 'tonsInSpace', quantity: 20 }]
       }]
     },
