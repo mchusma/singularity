@@ -4,6 +4,7 @@ import { View, Button, Text } from 'react-native';
 import { RootState } from '../store/store';
 import { updateUnitQuantity } from '../store/unitSlice';
 import { styles } from '../components/styles'; 
+import { buildUnit } from './components/buildUnit';
 
 interface Unit {
   id: string;
@@ -34,7 +35,7 @@ function Factory() {
     <View style={styles.unitWrapper}> 
       <View>
         <Text style={styles.text}>Factories Built: {unitQuantity}</Text>        
-        <Button title="Build Factory" onPress={() => dispatch(updateUnitQuantity({ unitId: 'factory', quantityChange: 1 }))} />
+        <Button title="Build Factory" onPress={buildUnit('factory')} />
       </View>
     </View>
   );
