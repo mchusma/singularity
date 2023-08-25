@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialUnits } from './initialUnits';
-import { initialUnitUpgrades } from './initialUnitUpgrades';
 
 export interface Unit {
   id: string;
@@ -26,6 +25,7 @@ export interface Upgrades {
   order: number;
   description: string;
   isVisible: boolean,
+  isApplied: boolean;
   resourceCostUpdate: Array<{ resourceId: string, quantity: number }>;
   resourceCost: Array<{ unitId: string, quantity: number }>;
   requiredUnits: Array<{ unitId: string, quantity: number }>;
@@ -76,11 +76,21 @@ const unitsSlice = createSlice({
             resourceCost.quantity *= resourceCostUpdate.quantity;
           }
         });
+    
+        upgrade.isVisible = false;
+        upgrade.isApplied = true;
+      }
+    },
+    updateUpgradeVisibility: (state, action: PayloadAction<{ unitId: string, upgradeId: string }>) => {
+      const unit = state.units.find(unit => unit.id === action.payload.unitId);
+      const upgrade = unit?.upgrades.find(upgrade => upgrade.id === action.payload.upgradeId);
+      if (upgrade) {
+          upgrade.isVisible = true;
       }
     }
 
   },
 });
 
-export const { updateUnitVisibility, updateUnitQuantity, resetGame, updateUnitLevel, applyUpgrade } = unitsSlice.actions;
+export const { updateUnitVisibility, updateUnitQuantity, resetGame, updateUnitLevel, applyUpgrade, updateUpgradeVisibility } = unitsSlice.actions;
 export default unitsSlice.reducer;

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, persistor } from '../store/store';
-import { Upgrades } from '../store/unitSlice';
+import { Upgrades, updateUpgradeVisibility } from '../store/unitSlice';
 import { upgradeUnit } from '../units/components/upgradeUnit';
 
 interface ActiveUpgradesProps {
@@ -9,29 +9,28 @@ interface ActiveUpgradesProps {
 }
 
 const ActiveUpgrades: React.FC<ActiveUpgradesProps> = ({ unitId }) => {
-    console.log('unitId:', unitId); // Log unitId
   
     const dispatch = useDispatch();
-  
     const unit = useSelector((state: RootState) => state.units.units.find(unit => unit.id === unitId));
-    console.log('unit:', unit); // Log unit
-  
     const upgrades = unit?.upgrades;
-    console.log('upgrades:', upgrades); // Log upgrades
-  
 
-  return (
-    <div>
-        {upgrades?.map((upgrade) => (
+    console.log('upgrades:', upgrades);
+
+    return (
+        <div>
+          {upgrades?.filter(upgrade => upgrade.isVisible && !upgrade.isApplied).map((upgrade) => (
             <button 
-            key={upgrade.id} 
-            onClick={() => unit && upgradeUnit(unit.id, upgrade.id)}
+              key={upgrade.id} 
+              onClick={() => {
+                console.log(`Upgrade attempted. Unit ID: ${unit?.id}, Upgrade ID: ${upgrade.id}, isVisible: ${upgrade.isVisible}, isApplied: ${upgrade.isApplied}`);
+                unit && upgradeUnit(unit.id, upgrade.id); // Use the function returned by the hook
+              }}
             >
-            {upgrade.name}
+              {upgrade.name}
             </button>
-        ))}
-    </div>
-  );
+          ))}
+        </div>
+      );
 };
 
 export default ActiveUpgrades;
