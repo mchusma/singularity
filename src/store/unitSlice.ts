@@ -26,6 +26,7 @@ export interface Upgrades {
   new_unit_name: string;
   order: number;
   description: string;
+  log_message: string;
   isVisible: boolean,
   isApplied: boolean;
   resourceCostUpdate: Array<{ resourceId: string, quantity: number }>;
@@ -83,6 +84,7 @@ const unitsSlice = createSlice({
         unit.name = upgrade.new_unit_name;
         unit.resourceOutput = upgrade.resourceOutputUpdate;
 
+        console.log(`Log message for unit: ${upgrade.log_message}`); // Log when function is called
 
         upgrade.isVisible = false;
         upgrade.isApplied = true;
