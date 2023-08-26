@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native'; // Added ScrollView
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useLog } from '../../src/LogContext';
 
 function LogTab() {
@@ -7,6 +7,7 @@ function LogTab() {
   const [currentTypingMessage, setCurrentTypingMessage] = useState('');
   const [charIndex, setCharIndex] = useState(0);
   const [isCursorVisible, setCursorVisible] = useState(true);
+  const scrollViewRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,7 +24,7 @@ function LogTab() {
       const typingInterval = setInterval(() => {
         setCharIndex(prev => prev + 1);
         if (charIndex >= currentTypingMessage.length) {
-          addLogMessage(currentTypingMessage); // Updated to use addLogMessage
+          addLogMessage(currentTypingMessage);
           setCurrentTypingMessage('');
           setCharIndex(0);
           clearInterval(typingInterval);
@@ -38,8 +39,12 @@ function LogTab() {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={[styles.scrollContainer, { flexGrow: 1 }]}>
-        <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+      <ScrollView
+        ref={scrollViewRef}
+        onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+      >
+        <View style={{ flex: 1 }}>
+          <View style={{ flexGrow: 1 }} />  {/* Spacer */}
           {messages.map((message, index) => (
             <Text key={index} style={styles.text}>{message}</Text>
           ))}
@@ -57,21 +62,15 @@ function LogTab() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-end',
     backgroundColor: '#000000',
     padding: 10,
     borderWidth: 2,
     borderColor: '#FFFFFF',
-    marginBottom: 0,
-  },
-  scrollContainer: {
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
   },
   text: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontFamily: 'monospace', // Using a monospace font
+    fontFamily: 'monospace',
   },
   cursor: {
     color: '#FFFFFF',
