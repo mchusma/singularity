@@ -20,6 +20,13 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 5
   },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: 'white',
+    marginHorizontal: 10,
+  },
 });
 
 function getRandomLightColor() {

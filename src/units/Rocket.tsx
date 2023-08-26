@@ -11,6 +11,7 @@ import ActiveUpgrades from '../components/activeUpgrades';
 interface Unit {
   id: string;
   quantity: number;
+  unitName: string;
 }
 
 function Rocket() {
@@ -21,26 +22,28 @@ function Rocket() {
   const money = useSelector((state: RootState) => state.resources.resources.find(res => res.id === 'money'));
 
   return (
-    <View style={styles.unitWrapper}>
-      <Text style={styles.text}>Rockets Built: {rocketsBuilt?.quantity || 0}</Text>  
-      <Text style={styles.text}>Tons in Space: {tonsInSpace?.quantity || 0}</Text>      
+    <View style={styles.unitWrapper}>    
+    <Text style={styles.text}>Resources Required:</Text>
+    {rocketsBuilt?.resourceCost.map((resource, index) => (
+      <Text key={index} style={styles.text}>
+        {resource.resourceId}: {resource.quantity}
+      </Text>
+    ))}
+
+    <Text style={styles.text}>Outputs:</Text>
+    {rocketsBuilt?.resourceOutput.map((resource, index) => (
+      <Text key={index} style={styles.text}>
+        {resource.resourceId}: {resource.quantity}
+      </Text>
+    ))} 
       <Text style={styles.text}>Rocket Level: {rocketsBuilt?.level || 0} | Cost: ${rocketsBuilt?.levelCost || 0}</Text>      
       <View style={styles.buttonContainer}>
         <Button 
-          title="Build Rocket" 
+          title={`Build ${rocketsBuilt?.name}`} 
           onPress={buildUnit('rocket')}
         />
       </View>
-      <View style={styles.buttonContainer}>
-      <Button 
-        title="Launch Rocket" 
-        onPress={() => {
-          dispatch(updateUnitQuantity({ unitId: 'rocket', quantityChange: -1 }));
-          dispatch(updateResourceQuantity({ resourceId: 'tonsInSpace', quantityChange: 1 }));
-          dispatch(updateResourceQuantity({ resourceId: 'money', quantityChange: 200 }));
-        }} 
-      />   
-      </View>
+
       <View style={styles.buttonContainer}>
       <Button 
         title="Upgrade Rocket" 

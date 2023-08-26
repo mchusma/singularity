@@ -1,13 +1,22 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Factory from '../units/Factory';
-import FactoryEmitter from '../units/FactoryEmitter';
+import Economy from '../units/Economy';
+import Human from '../units/Humans';
 import Rocket from '../units/Rocket';
+import Science from '../units/Science';
 import { resetGame, updateUnitVisibility } from '../store/unitSlice';
 import { RootState, persistor } from '../store/store';
 import { Unit } from '../store/unitSlice';
+import { View, Dimensions } from 'react-native';
 
-const activeUnits = [Factory, FactoryEmitter, Rocket];
+Economy.unitId = 'economy';
+Human.unitId = 'human';
+Rocket.unitId = 'rocket';
+Science.unitId = 'science';
+
+const screenWidth = Dimensions.get('window').width;
+const unitWidth = screenWidth >= 800 ? 400 : '100%';
+const activeUnits = [Economy, Human, Rocket, Science];
 
 const useUpdatedRef = (val: any) => {
   const ref = useRef(val);
@@ -53,10 +62,10 @@ const ActiveUnits = () => {
     }, [dispatch, unitsRef]);
 
     const visibleUnitsWithState = activeUnits.map(UnitComponent => {
-        // Find the corresponding unit in the Redux state
-        const unitState = units.find(unit => unit.name === UnitComponent.unitName);
+        console.log('UnitComponent:', UnitComponent);
+        const unitState = units.find(unit => unit.id === UnitComponent.unitId);
         if (!unitState) {
-            console.error(`Unit with name ${UnitComponent.unitName} not found in state`);
+            console.error(`Unit with id ${UnitComponent.unitId} not found in state`);
         }
         return { UnitComponent, ...unitState };
     }).filter(unit => unit.isVisible);
@@ -64,7 +73,13 @@ const ActiveUnits = () => {
     const sortedVisibleUnits = visibleUnitsWithState.sort((a, b) => (a.order || 0) - (b.order || 0)).map(unit => unit.UnitComponent);    
     return (
         <div>
-            {sortedVisibleUnits.map((Unit, index) => <Unit key={index} />)}
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                {sortedVisibleUnits.map((Unit, index) => (
+                    <View style={{ width: unitWidth, margin: 10 }} key={index}>
+                        <Unit />
+                    </View>
+                ))}
+            </View>
             <button onClick={() => {
                 persistor.purge().then(() => {
                     dispatch(resetGame());

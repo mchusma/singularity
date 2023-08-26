@@ -4,6 +4,7 @@ import { View, Text } from 'react-native';
 import { RootState, persistor } from '../store/store';
 import { styles } from './styles'; 
 import { resetGame } from '../store/resourceSlice';
+import FormattedNumber from './formattedNumber';
 
 function ActiveResources() {
   const resources = useSelector((state: RootState) => state.resources.resources);
@@ -13,7 +14,7 @@ function ActiveResources() {
     <View style={styles.resourceWrapper}>
       {resources.map((resource) => (
         <Text key={resource.id} style={styles.text}>
-          {resource.name}: {resource.quantity}
+          {resource.name}: <FormattedNumber value={resource.quantity} />
         </Text>
       ))}
               <button onClick={() => {

@@ -12,10 +12,15 @@ export const initialResources: ResourcesState = {
       quantity: 1000,
       requiredUnits: []
     },
-      { id: 'population', 
-      name: 'Population', 
-      quantity: 7.9,
+      { id: 'energy', 
+      name: 'Energy Production', 
+      quantity: 17.02,
         requiredUnits: []
     },
+    { id: 'land', 
+    name: 'Inhabitable Land', 
+    quantity: 15770000000,
+      requiredUnits: []
+  },
     ],
   };

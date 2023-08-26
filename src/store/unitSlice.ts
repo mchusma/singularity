@@ -6,6 +6,7 @@ export interface Unit {
   name: string;
   order: number,
   resourceCost: Array<{ resourceId: string, quantity: number }>;
+  resourceOutput: Array<{ resourceId: string, quantity: number }>;
   unitCost: Array<{ unitId: string, quantity: number }>;
   isVisible: boolean;
   quantity: number;
@@ -22,12 +23,14 @@ export interface UnitsState {
 export interface Upgrades {
   id: string;
   name: string;
+  new_unit_name: string;
   order: number;
   description: string;
   isVisible: boolean,
   isApplied: boolean;
   resourceCostUpdate: Array<{ resourceId: string, quantity: number }>;
   resourceCost: Array<{ unitId: string, quantity: number }>;
+  resourceOutputUpdate: Array<{ resourceId: string, quantity: number }>;
   requiredUnits: Array<{ unitId: string, quantity: number }>;
   requiredResources: Array<{ unitId: string, quantity: number }>;
 }
@@ -76,7 +79,11 @@ const unitsSlice = createSlice({
             resourceCost.quantity *= resourceCostUpdate.quantity;
           }
         });
-    
+        console.log(`Upgrading ${unit.id} from ${unit.name} to ${upgrade.new_unit_name}`);
+        unit.name = upgrade.new_unit_name;
+        unit.resourceOutput = upgrade.resourceOutputUpdate;
+
+
         upgrade.isVisible = false;
         upgrade.isApplied = true;
       }
