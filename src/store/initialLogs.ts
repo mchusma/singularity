@@ -1,5 +1,5 @@
 import { LogState } from './log';
 
-export const initialLog: LogState = {
+export const initialLogs: LogState = {
     logs: ["Welcome to the game!"],
   };

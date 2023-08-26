@@ -6,7 +6,7 @@ import { styles } from './styles';
 import { resetGame } from '../store/resourceSlice';
 import FormattedNumber from './formattedNumber';
 
-function ActiveLog() {
+function ActiveLogs() {
   const resources = useSelector((state: RootState) => state.resources.resources);
   const dispatch = useDispatch();
 
@@ -26,4 +26,4 @@ function ActiveLog() {
   );
 }
 
-export default ActiveLog;
+export default ActiveLogs;

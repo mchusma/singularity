@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { initialLog } from './initialLog';
+import { initialLog } from './initialLogs';
 
 interface Log {
   id: string;
