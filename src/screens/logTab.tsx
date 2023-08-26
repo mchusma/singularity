@@ -7,7 +7,7 @@ function LogTab() {
   const [currentTypingMessage, setCurrentTypingMessage] = useState('');
   const [charIndex, setCharIndex] = useState(0);
   const [isCursorVisible, setCursorVisible] = useState(true);
-  const scrollViewRef = useRef(null);
+  const scrollViewRef = useRef<ScrollView | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -41,7 +41,7 @@ function LogTab() {
     <View style={styles.container}>
       <ScrollView
         ref={scrollViewRef}
-        onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+        onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
       >
         <View style={{ flex: 1 }}>
           <View style={{ flexGrow: 1 }} />  {/* Spacer */}
