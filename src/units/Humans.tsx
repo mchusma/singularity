@@ -26,7 +26,8 @@ interface Unit {
           {attribute.name}: <FormattedNumber value={attribute.quantity} />
         </Text>
       ))}
-      <Text style={styles.text}>Humans grow with land, education, inspiration, energy, lifespan, productive years</Text>
+      <Text style={styles.text}>Population growth rate (1.1% currently) - Humans growth rate grows in proportion to land, inspiration, energy, lifespan. Decreases with education.</Text>
+      <Text style={styles.text}>% productive - Increases with lifespan and education.</Text>
       <ActiveUpgrades unitId="human" />
     </View>
   );

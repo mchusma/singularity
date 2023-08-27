@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { initialLog } from './initialLogs';
+import { initialLogs } from './initialLogs';
 
 interface Log {
-  id: string;
+  id: number;
   message: string;
 }
 
@@ -12,19 +12,16 @@ export interface LogState {
 
 const logSlice = createSlice({
   name: 'log',
-  initialState: initialLog,
+  initialState: initialLogs,
   reducers: {
-    updateResourceQuantity: (state, action: PayloadAction<{ resourceId: string, quantityChange: number }>) => {
-      const resource = state.resources.find(res => res.id === action.payload.resourceId);
-      if (resource) {
-        resource.quantity += action.payload.quantityChange;
-      }
+    addMessage: (state, action: PayloadAction<Log>) => {
+      state.logs.push(action.payload);
     },
     resetGame: (state) => {
-        return initialLog;
-      },
+      return initialLogs;
+    },
   },
 });
 
-export const { updateResourceQuantity, resetGame } = resourcesSlice.actions;
-export default resourcesSlice.reducer;
+export const { addMessage, resetGame } = logSlice.actions;
+export default logSlice.reducer;

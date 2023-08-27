@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import logger from 'redux-logger';
 import resourcesReducer from './resourceSlice';
+import logsReducer from './resourceSlice';
 
 const persistConfig = {
   key: 'root',

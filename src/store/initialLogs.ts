@@ -1,5 +1,10 @@
-import { LogState } from './log';
+import { LogState } from './logSlice';
 
 export const initialLogs: LogState = {
-    logs: ["Welcome to the game!"],
-  };
+  logs: [
+    {
+      id: 1, 
+      message: 'Welcome to the game!'
+    }
+  ]
+};
