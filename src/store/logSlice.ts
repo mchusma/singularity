@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialLogs } from './initialLogs';
 
-interface Log {
+export interface Log {
   id: number;
   message: string;
 }

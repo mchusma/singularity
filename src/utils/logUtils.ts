@@ -1,7 +1,6 @@
 import { addMessage } from '../store/logSlice';
-import { Log } from '../store/logSlice';
 
-export const handleAddMessage = (dispatch: Function, logs: Log[], message: string) => {
+export const handleAddMessage = (logs: any[], message: string, dispatch: Function) => {
     const newLog = {
         id: logs.length + 1,
         message: message
