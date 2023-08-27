@@ -1,5 +1,6 @@
 // LogContext.tsx
-import React, { createContext, useContext, useState } from 'react';
+import React, { useState } from 'react';
+
 
 // Define an interface for the context state
 interface LogContextType {

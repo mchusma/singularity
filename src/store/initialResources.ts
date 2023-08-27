@@ -17,10 +17,6 @@ export const initialResources: ResourcesState = {
       quantity: 17.02,
         requiredUnits: []
     },
-<<<<<<< Updated upstream
-    { id: 'land',
-    name: 'Inhabitable Land',
-=======
     { id: 'productionCapacity', 
     name: 'Production Capacity', 
     quantity: 1,
@@ -33,7 +29,6 @@ export const initialResources: ResourcesState = {
 },
     { id: 'land', 
     name: 'Inhabitable Land', 
->>>>>>> Stashed changes
     quantity: 15770000000,
       requiredUnits: []
   },

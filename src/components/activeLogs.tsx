@@ -7,9 +7,9 @@ import { resetGame } from '../store/resourceSlice';
 import FormattedNumber from './formattedNumber';
 
 function ActiveLogs() {
-  const logs = useSelector((state: RootState) => state.logs.logs);
   const dispatch = useDispatch();
-
+  const logs = useSelector((state: RootState) => state.logs ? state.logs.logs : []);
+  
   return (
     <View style={styles.resourceWrapper}>
       {logs.map((log) => (
