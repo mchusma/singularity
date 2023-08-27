@@ -38,5 +38,11 @@ export const initialResources: ResourcesState = {
       quantity: 15770000000,
       requiredUnits: []
     },
+    {
+      id: 'land',
+      name: 'Inhabitable Land',
+      quantity: 15770000000,
+      requiredUnits: []
+    },
   ],
 };

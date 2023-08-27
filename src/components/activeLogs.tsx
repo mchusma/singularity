@@ -6,18 +6,9 @@ import { styles } from './styles';
 import { resetGame, addMessage } from '../store/logSlice';  // Import the addMessage action
 
 function ActiveLogs() {
-  const logs = useSelector((state: RootState) => state.logs.logs);
   const dispatch = useDispatch();
   const scrollViewRef = React.useRef<ScrollView | null>(null);
-
-  const handleAddMessage = (message: string) => {
-    const newLog = {
-      id: logs.length + 1,
-      message: message
-    };
-    dispatch(addMessage(newLog));
-  }
-
+  const logs = useSelector((state: RootState) => state.logs ? state.logs.logs : []);
 
   return (
     <View style={styles.logWrapper}>
