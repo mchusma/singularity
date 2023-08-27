@@ -1,13 +1,15 @@
 // src/units/components/upgradeUnit.ts
 import { applyUpgrade } from '../../store/unitSlice';
 import { updateResourceQuantity } from '../../store/resourceSlice';
+import { handleAddMessage } from '../../utils/logUtils';
+
 
 interface Cost {
   resourceId: string;
   quantity: number;
 }
 
-export const upgradeUnit = (unit: any, upgradeId: string, dispatch: Function) => {
+export const upgradeUnit = (unit: any, upgradeId: string, dispatch: Function, logs: Log[]) => {
   console.log(`upgradeUnit called with unitId: ${unit.id} and upgradeId: ${upgradeId}`);
   if (!unit) {
     console.error(`Unit not found`);
@@ -19,6 +21,8 @@ export const upgradeUnit = (unit: any, upgradeId: string, dispatch: Function) =>
   // apply the upgrade
   dispatch(applyUpgrade({ unitId: unit.id, upgradeId }));
   console.log(`Upgrade applied to unitId: ${unit.id}`); // Log after upgrade is applied
+
+  handleAddMessage(dispatch, logs, `Upgrade applied to unitId: ${unit.id}`);
 
   // apply the cost of the upgrade
   unit.resourceCost.forEach((cost: Cost) => {

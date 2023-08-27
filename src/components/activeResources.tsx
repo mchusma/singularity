@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Text } from 'react-native';
 import { RootState, persistor } from '../store/store';
-import { styles } from './styles'; 
+import { styles } from './styles';
 import { resetGame } from '../store/resourceSlice';
 import FormattedNumber from './formattedNumber';
 
@@ -17,11 +17,11 @@ function ActiveResources() {
           {resource.name}: <FormattedNumber value={resource.quantity} />
         </Text>
       ))}
-              <button onClick={() => {
-          persistor.purge().then(() => {
-              dispatch(resetGame());
-          });
-          }}>Reset Resources</button>
+      <button onClick={() => {
+        persistor.purge().then(() => {
+          dispatch(resetGame());
+        });
+      }}>Reset Resources</button>
     </View>
   );
 }

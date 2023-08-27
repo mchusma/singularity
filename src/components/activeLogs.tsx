@@ -1,29 +1,41 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, ScrollView } from 'react-native';
 import { RootState, persistor } from '../store/store';
 import { styles } from './styles';
-import { resetGame } from '../store/resourceSlice';
-import FormattedNumber from './formattedNumber';
+import { resetGame, addMessage } from '../store/logSlice';  // Import the addMessage action
 
 function ActiveLogs() {
   const logs = useSelector((state: RootState) => state.logs.logs);
   const dispatch = useDispatch();
+  const scrollViewRef = React.useRef<ScrollView | null>(null);
+
+  const handleAddMessage = (message: string) => {
+    const newLog = {
+      id: logs.length + 1,
+      message: message
+    };
+    dispatch(addMessage(newLog));
+  }
+
 
   return (
-    <View style={styles.resourceWrapper}>
-      {logs.map((log) => (
-        <Text key={log.id} style={styles.text}>
-          {log.name}: <FormattedNumber value={log.quantity} />
-        </Text>
-      ))}
-      <Pressable style={styles.button} onPress={() => {
+    <View style={styles.logWrapper}>
+      <ScrollView
+        ref={scrollViewRef}
+        onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({ animated: true })}
+      >
+        {logs?.map((log) => (
+          <Text key={log.id} style={styles.text}>
+            {log.message}
+          </Text>
+        ))}
+      </ScrollView>
+      <button onClick={() => {
         persistor.purge().then(() => {
-            dispatch(resetGame());
+          dispatch(resetGame());
         });
-      }}>
-        <Text style={styles.buttonText}>Reset Log</Text>
-      </Pressable>
+      }}>Reset Log</button>
     </View>
   );
 }

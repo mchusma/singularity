@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     padding: 5
   },
   buttonContainer: {
-    paddingBottom: 10,
+    paddingBottom: 50,
   },
   resourceWrapper: {
     borderColor: getRandomLightColor(),
@@ -26,6 +26,14 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: 'white',
     marginHorizontal: 10,
+  },
+  logWrapper: {
+    flex: 1,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#FFFFFF',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
 });
 

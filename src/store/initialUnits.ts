@@ -6,7 +6,7 @@ export const initialUnits: UnitsState = {
       id: 'rocket',
       name: 'Scout Rocket',
       order: 1,
-      resourceCost: [{ resourceId: 'money', quantity: 120000 },{ resourceId: 'productionCapacity', quantity: 1 }],
+      resourceCost: [{ resourceId: 'money', quantity: 120000 }, { resourceId: 'productionCapacity', quantity: 1 }],
       resourceOutput: [{ resourceId: 'tonsInSpace', quantity: 0.25 }],
       unitCost: [],
       isVisible: true,
@@ -15,7 +15,7 @@ export const initialUnits: UnitsState = {
       levelCost: 10000,
       requiredUnits: [],
       attributes: [],
-      upgrades: [  {
+      upgrades: [{
         id: 'rocket.advanced',
         name: 'Mildly Reusable Larger Rockets',
         new_unit_name: 'Space Shuttle',
@@ -24,7 +24,7 @@ export const initialUnits: UnitsState = {
         isVisible: false,
         isApplied: false,
         resourceCostUpdate: [{ resourceId: 'money', quantity: 0.5 }],
-        resourceCost: [{ unitId: 'money', quantity: 192000000000 },{ unitId: 'productionCapacity', quantity: 1 }],
+        resourceCost: [{ unitId: 'money', quantity: 192000000000 }, { unitId: 'productionCapacity', quantity: 1 }],
         resourceOutputUpdate: [{ resourceId: 'tonsInSpace', quantity: 25 }],
         requiredUnits: [],
         requiredResources: [{ unitId: 'tonsInSpace', quantity: 10 }]
@@ -71,12 +71,11 @@ export const initialUnits: UnitsState = {
       levelCost: 0,
       requiredUnits: [{ unitId: 'rocket', quantity: 10 }],
       attributes: [],
-      upgrades: [  {
+      upgrades: [{
         id: 'economy.satellites',
         name: 'Commercial Satellites',
         new_unit_name: 'Economy',
         description: 'Commercial satellites increase the demand for tons in space, beyond govenerment contracts.',
-        log_message: 'Human upgrade 1 applied',
         order: 1,
         isVisible: false,
         isApplied: false,
@@ -99,13 +98,12 @@ export const initialUnits: UnitsState = {
       level: 0,
       levelCost: 0,
       requiredUnits: [],
-      attributes: [{ name: 'Lifespan', quantity: 73.4 },{ name: 'Education Level', quantity: 0},{ name: 'Inspiration Level', quantity: 0}],
+      attributes: [{ name: 'Lifespan', quantity: 73.4 }, { name: 'Education Level', quantity: 0 }, { name: 'Inspiration Level', quantity: 0 }],
       upgrades: [{
         id: 'human.satellites',
         name: 'Upgrade 1',
         new_unit_name: 'Humans',
         description: 'Life and stuff',
-        log_message: 'Human upgrade 1 applied',
         order: 1,
         isVisible: false,
         isApplied: false,
@@ -120,7 +118,6 @@ export const initialUnits: UnitsState = {
         name: 'Upgrade 2',
         new_unit_name: 'Humans',
         description: 'more stuff',
-        log_message: 'Human upgrade 2 applied',
         order: 1,
         isVisible: false,
         isApplied: false,
@@ -144,7 +141,7 @@ export const initialUnits: UnitsState = {
       level: 0,
       levelCost: 0,
       requiredUnits: [],
-      attributes: [{ name: 'Biology', quantity: 0.3333 },{ name: 'Physics', quantity: 0.3333 },{ name: 'Engineering', quantity: 0.3333 }],
+      attributes: [{ name: 'Biology', quantity: 0.3333 }, { name: 'Physics', quantity: 0.3333 }, { name: 'Engineering', quantity: 0.3333 }],
       upgrades: []
     },
   ]

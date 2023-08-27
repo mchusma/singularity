@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialUnits } from './initialUnits';
+import { addMessage } from './logSlice';
 
 export interface Unit {
   id: string;
@@ -26,7 +27,6 @@ export interface Upgrades {
   new_unit_name: string;
   order: number;
   description: string;
-  log_message: string;
   isVisible: boolean,
   isApplied: boolean;
   resourceCostUpdate: Array<{ resourceId: string, quantity: number }>;
@@ -84,7 +84,8 @@ const unitsSlice = createSlice({
         unit.name = upgrade.new_unit_name;
         unit.resourceOutput = upgrade.resourceOutputUpdate;
 
-        console.log(`Log message for unit: ${upgrade.log_message}`); // Log when function is called
+        console.log(`Log message for unit: ${upgrade.description}`); // Log when function is called
+        addMessage({ id: "upgrade-#{upgrade.name}", message: upgrade.description }); // Add message to log
 
         upgrade.isVisible = false;
         upgrade.isApplied = true;
