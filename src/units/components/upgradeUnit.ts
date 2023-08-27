@@ -8,8 +8,7 @@ interface Cost {
 }
 
 export const upgradeUnit = (unit: any, upgradeId: string, dispatch: Function) => {
-  console.log(`upgradeUnit called with unitId: ${unit.id} and upgradeId: ${upgradeId}`); // Log when function is called
-
+  console.log(`upgradeUnit called with unitId: ${unit.id} and upgradeId: ${upgradeId}`);
   if (!unit) {
     console.error(`Unit not found`);
     return;

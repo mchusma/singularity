@@ -4,20 +4,24 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from './src/store/store';
 import ActionTab from './src/screens/actionTab';
-import LogTab from './src/screens/logTab';
+import LogTab, { styles as logTabStyles } from './src/screens/logTab';
+import { LogProvider } from './src/LogContext';
+
 
 export default function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <SafeAreaView style={styles.container}>
-          <View style={styles.logTab}>
-            <LogTab />
-          </View>
-          <View style={styles.actionTab}>
-            <ActionTab />
-          </View>
-        </SafeAreaView>
+        <LogProvider>
+          <SafeAreaView style={styles.container}>
+          <View style={logTabStyles.container}>
+              <LogTab />
+            </View>
+            <View style={styles.actionTab}>
+              <ActionTab />
+            </View>
+          </SafeAreaView>
+        </LogProvider>
       </PersistGate>
     </Provider>
   );
@@ -27,10 +31,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#25292e',
-  },
-  logTab: {
-    flex: 1,
-    backgroundColor: '#000000', // black background color
   },
   actionTab: {
     flex: 9,

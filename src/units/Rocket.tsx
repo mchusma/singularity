@@ -4,7 +4,7 @@ import { View, Button,Text } from 'react-native';
 import { RootState } from '../store/store';
 import { updateUnitQuantity, updateUnitLevel } from '../store/unitSlice';
 import { updateResourceQuantity } from '../store/resourceSlice';
-import { styles } from '../components/styles'; 
+import { styles } from '../components/styles';
 import { buildUnit } from './components/buildUnit';
 import ActiveUpgrades from '../components/activeUpgrades';
 
@@ -22,7 +22,7 @@ function Rocket() {
   const money = useSelector((state: RootState) => state.resources.resources.find(res => res.id === 'money'));
 
   return (
-    <View style={styles.unitWrapper}>    
+    <View style={styles.unitWrapper}>
     <Text style={styles.text}>Resources Required:</Text>
     {rocketsBuilt?.resourceCost.map((resource, index) => (
       <Text key={index} style={styles.text}>
@@ -35,25 +35,28 @@ function Rocket() {
       <Text key={index} style={styles.text}>
         {resource.resourceId}: {resource.quantity}
       </Text>
-    ))} 
-      <Text style={styles.text}>Rocket Level: {rocketsBuilt?.level || 0} | Cost: ${rocketsBuilt?.levelCost || 0}</Text>      
+    ))}
+      <Text style={styles.text}>Rocket Level: {rocketsBuilt?.level || 0} | Cost: ${rocketsBuilt?.levelCost || 0}</Text>
       <View style={styles.buttonContainer}>
-        <Button 
-          title={`Build ${rocketsBuilt?.name}`} 
-          onPress={buildUnit('rocket')}
-        />
+      <Button
+  title={`Build ${rocketsBuilt?.name}`}
+  onPress={() => {
+    buildUnit('rocket')();
+  }}
+/>
+
       </View>
 
       <View style={styles.buttonContainer}>
-      <Button 
-        title="Upgrade Rocket" 
+      <Button
+        title="Upgrade Rocket"
         disabled={(money?.quantity || 0) < (rocketsBuilt?.levelCost || 0)}
         onPress={() => {
           if (rocketsBuilt && 'levelCost' in rocketsBuilt && money && money.quantity >= rocketsBuilt.levelCost) {
             dispatch(updateUnitLevel({ unitId: 'rocket', levelChange: 1, levelCostChange: rocketsBuilt?.levelCost * 2 }));
             dispatch(updateResourceQuantity({ resourceId: 'money', quantityChange: -rocketsBuilt?.levelCost }));
           }
-        }} 
+        }}
       />
       </View>
       <ActiveUpgrades unitId="rocket" />
