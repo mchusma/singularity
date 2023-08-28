@@ -80,7 +80,6 @@ export const initialUnits: UnitsState = {
         new_unit_name: 'Economy',
         log_message: 'more demand for satellites', 
         description: 'Commercial satellites increase the demand for tons in space, beyond govenerment contracts.',
-        log_message: 'Human upgrade 1 applied',
         order: 1,
         isVisible: false,
         isApplied: false,
@@ -103,7 +102,7 @@ export const initialUnits: UnitsState = {
       level: 0,
       levelCost: 0,
       requiredUnits: [],
-      attributes: [{ name: 'Lifespan', quantity: 73.4 },{ name: 'Education Level', quantity: 0},{ name: 'Inspiration Level', quantity: 0}],
+      attributes: [{ name: 'Lifespan', quantity: 73.4 },{ name: 'Education Level', quantity: 0},{ name: 'Inspiration Level', quantity: 0},{ name: 'productionRate', quantity: 1}],
       upgrades: [{
         id: 'human.satellites',
         name: 'Upgrade 1',
@@ -148,8 +147,39 @@ export const initialUnits: UnitsState = {
       level: 0,
       levelCost: 0,
       requiredUnits: [],
-      attributes: [{ name: 'Biology', quantity: 0.3333 },{ name: 'Physics', quantity: 0.3333 },{ name: 'Engineering', quantity: 0.3333 }],
+      attributes: [{ name: 'Biology', quantity: 0 },{ name: 'Physics', quantity: 0 },{ name: 'Engineering', quantity: 0 }],
       upgrades: []
     },
+    {
+      id: 'energy',
+      name: 'Energy',
+      order: 5,
+      resourceCost: [{ resourceId: 'money', quantity: 1000000 }, { resourceId: 'productionCapacity', quantity: 1 }],
+      resourceOutput: [{ resourceId: 'energy', quantity: 10 }],
+      unitCost: [],
+      isVisible: true,
+      quantity: 0,
+      level: 0,
+      levelCost: 50000,
+      requiredUnits: [{ unitId: 'science', quantity: 1 }],
+      attributes: [{ name: 'Efficiency', quantity: 1 }],
+      upgrades: [
+        {
+          id: 'energy.solar',
+          name: 'Solar Power',
+          new_unit_name: 'Solar Plant',
+          log_message: 'Solar power upgrade applied',
+          description: 'Harness the power of the sun to generate energy.',
+          order: 1,
+          isVisible: false,
+          isApplied: false,
+          resourceCostUpdate: [{ resourceId: 'money', quantity: 0.8 }],
+          resourceCost: [{ unitId: 'money', quantity: 800000 }],
+          resourceOutputUpdate: [{ resourceId: 'energy', quantity: 15 }],
+          requiredUnits: [],
+          requiredResources: [{ unitId: 'money', quantity: 500000 }]
+        }
+      ]
+    }
   ]
 };

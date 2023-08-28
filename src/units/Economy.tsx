@@ -68,7 +68,11 @@ function Economy() {
 
   return (
     <View style={styles.unitWrapper}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Economy</Text>
+      </View>
       <View>
+      <Text style={styles.text}>Economy generates money, which is required for expansion.</Text>
         <Text style={styles.text}>Economy running...</Text>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           {unit?.resourceCost.map((resource, index) => (

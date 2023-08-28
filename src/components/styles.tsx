@@ -7,6 +7,17 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 5
   },
+  header: {
+    backgroundColor: '#3F51B5',
+    padding: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
   unitWrapper: {
     borderColor: getRandomLightColor(),
     borderWidth: 1,
@@ -26,6 +37,17 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: 'white',
     marginHorizontal: 10,
+  },
+  dotPlaceholder: {
+    width: 10,
+    height: 10,
+    borderRadius: 5, 
+    backgroundColor: 'transparent',
+    marginHorizontal: 10,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center', 
   },
 });
 

@@ -24,7 +24,10 @@ function Rocket() {
 
   return (
     <View style={styles.unitWrapper}>
-    <Text style={styles.text}>Rockets are needed to do space stuff, get more land, resources for fusion, etc.</Text>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Space</Text>
+      </View>
+    <Text style={styles.text}>Space is ultimately required to get more land, resources, and ultimately expand humanity.</Text>
     <Text style={styles.text}>Resources Required:</Text>
     {rocketsBuilt?.resourceCost.map((resource, index) => (
       <Text key={index} style={styles.text}>

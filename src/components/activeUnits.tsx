@@ -4,6 +4,7 @@ import Economy from '../units/Economy';
 import Human from '../units/Humans';
 import Rocket from '../units/Rocket';
 import Science from '../units/Science';
+import Energy from '../units/Energy';
 import { resetGame, updateUnitVisibility } from '../store/unitSlice';
 import { RootState, persistor } from '../store/store';
 import { Unit } from '../store/unitSlice';
@@ -13,10 +14,11 @@ Economy.unitId = 'economy';
 Human.unitId = 'human';
 Rocket.unitId = 'rocket';
 Science.unitId = 'science';
+Energy.unitId = 'energy';
 
 const screenWidth = Dimensions.get('window').width;
 const unitWidth = screenWidth >= 800 ? 400 : '100%';
-const activeUnits = [Economy, Human, Rocket, Science];
+const activeUnits = [Economy, Human, Rocket, Science, Energy];
 
 const useUpdatedRef = (val: any) => {
   const ref = useRef(val);
