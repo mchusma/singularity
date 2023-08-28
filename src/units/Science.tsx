@@ -7,6 +7,7 @@ import { styles } from '../components/styles';
 import { buildUnit } from './components/buildUnit';
 import ActiveUpgrades from '../components/activeUpgrades';
 import FormattedNumber from '../components/formattedNumber';
+import AnimatedButton from '../components/animatedButton';
 
 interface Unit {
     id: string;
@@ -29,6 +30,12 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
   const [selectedAttribute, setSelectedAttribute] = useState<Attribute | null>(null);
   const [isRouletteMode, setIsRouletteMode] = useState<boolean>(true);
   const selectedIndex = selectedAttribute ? science?.attributes?.indexOf(selectedAttribute) : -1;
+
+  const tryScience = () => {
+    setSelectedAttribute(null);
+    setIsRouletteMode(true);
+  };
+
   // Cycle through attributes when in roulette mode
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
@@ -48,16 +55,6 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
     return () => clearInterval(intervalId);
   }, [isRouletteMode, science]);
 
-  // After 3 seconds of having an attribute selected, remove the selected attribute and re-enable roulette mode
-  useEffect(() => {
-    if (!isRouletteMode && selectedAttribute) {
-      setTimeout(() => {
-        setSelectedAttribute(null);
-        setIsRouletteMode(true);
-      }, 3000);
-    }
-  }, [isRouletteMode, selectedAttribute]);
-
   return (
     <View style={styles.unitWrapper}>
       <View style={styles.header}>
@@ -76,7 +73,7 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
           </Text>
         </View>
       ))}
-      <ActiveUpgrades unitId="science" />
+    <AnimatedButton title="Try Science" onPress={tryScience} disabled={isRouletteMode} />    <ActiveUpgrades unitId="science" />
     </View>
   );
 };
