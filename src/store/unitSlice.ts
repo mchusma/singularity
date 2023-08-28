@@ -14,6 +14,7 @@ export interface Unit {
   level: number;
   levelCost: number;
   upgrades: Upgrades[];
+  attributes: Array<{ name: string, quantity: number }>;
 }
 
 export interface UnitsState {

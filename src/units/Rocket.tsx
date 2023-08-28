@@ -20,9 +20,11 @@ function Rocket() {
   const rocketsBuilt = useSelector((state: RootState) => state.units?.units?.find((unit) => unit.id === unitId));
   const tonsInSpace = useSelector((state: RootState) => state.resources.resources.find(res => res.id === 'tonsInSpace'));
   const money = useSelector((state: RootState) => state.resources.resources.find(res => res.id === 'money'));
+  const useBuildUnit = buildUnit('rocket');
 
   return (
     <View style={styles.unitWrapper}>
+    <Text style={styles.text}>Rockets are needed to do space stuff, get more land, resources for fusion, etc.</Text>
     <Text style={styles.text}>Resources Required:</Text>
     {rocketsBuilt?.resourceCost.map((resource, index) => (
       <Text key={index} style={styles.text}>
@@ -41,7 +43,7 @@ function Rocket() {
       <Button
   title={`Build ${rocketsBuilt?.name}`}
   onPress={() => {
-    buildUnit('rocket')();
+    useBuildUnit();
   }}
 />
 
