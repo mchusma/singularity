@@ -10,12 +10,6 @@ import { RootState, persistor } from '../store/store';
 import { Unit } from '../store/unitSlice';
 import { View, Dimensions } from 'react-native';
 
-Economy.unitId = 'economy';
-Human.unitId = 'human';
-Rocket.unitId = 'rocket';
-Science.unitId = 'science';
-Energy.unitId = 'energy';
-
 const screenWidth = Dimensions.get('window').width;
 const unitWidth = screenWidth >= 800 ? 400 : '100%';
 const activeUnits = [Economy, Human, Rocket, Science, Energy];
@@ -64,10 +58,9 @@ const ActiveUnits = () => {
     }, [dispatch, unitsRef]);
 
     const visibleUnitsWithState = activeUnits.map(UnitComponent => {
-        console.log('UnitComponent:', UnitComponent);
-        const unitState = units.find(unit => unit.id === UnitComponent.unitId);
+        const unitState = units.find(unit => unit.id === UnitComponent.name.toLowerCase());
         if (!unitState) {
-            console.error(`Unit with id ${UnitComponent.unitId} not found in state`);
+            console.error(`Unit with id ${UnitComponent.name.toLowerCase()} not found in state`);
         }
         return { UnitComponent, ...unitState };
     }).filter(unit => unit.isVisible);

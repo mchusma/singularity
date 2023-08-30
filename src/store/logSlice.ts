@@ -6,7 +6,7 @@ interface Log {
   message: string;
 }
 
-export interface LogState {
+export interface LogsState {
   logs: Log[];
 }
 

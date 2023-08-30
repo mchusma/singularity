@@ -4,7 +4,7 @@ export const initialResources: ResourcesState = {
     resources: [
       { id: 'tonsInSpace',
         name: 'Tons in Space',
-        quantity: 0,
+        quantity: 1000,
         requiredUnits: []
       },
       { id: 'money',

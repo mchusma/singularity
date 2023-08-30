@@ -25,11 +25,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 9,
     backgroundColor: '#25292e',
   },
   actionTab: {
-    flex: 9,
-    backgroundColor: '#333333', // dark grey background color
+    flex: 1,
+    backgroundColor: '#333333', 
   },
 });

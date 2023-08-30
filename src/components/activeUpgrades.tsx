@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, persistor } from '../store/store';
 import { Upgrades, updateUpgradeVisibility } from '../store/unitSlice';
 import { upgradeUnit } from '../units/components/upgradeUnit';
+import { addMessage } from '../store/logSlice';
 
 interface ActiveUpgradesProps {
   unitId: string;
@@ -36,7 +37,7 @@ const ActiveUpgrades: React.FC<ActiveUpgradesProps> = ({ unitId }) => {
             return resource && resource.quantity >= requiredResource.quantity;
           });
 
-          if (requiredUnitsMet && requiredResourcesMet) {
+          if (requiredUnitsMet && requiredResourcesMet && unit) {
             console.log(`Upgrade ${upgrade.name} to be visible`);
             dispatch(updateUpgradeVisibility({ unitId: unit.id, upgradeId: upgrade.id}));
           }
@@ -56,6 +57,8 @@ const ActiveUpgrades: React.FC<ActiveUpgradesProps> = ({ unitId }) => {
           onClick={() => {
             console.log(`Upgrade attempted. Unit ID: ${unit?.id}, Upgrade ID: ${upgrade.id}, isVisible: ${upgrade.isVisible}, isApplied: ${upgrade.isApplied}`);
             unit && upgradeUnit(unit, upgrade.id, dispatch); 
+
+            dispatch(addMessage({ id: Date.now(), message: upgrade.log_message }));
           }}
         >
           <strong>{upgrade.name}</strong>

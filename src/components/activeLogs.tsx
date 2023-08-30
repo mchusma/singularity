@@ -1,31 +1,36 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text } from 'react-native';
 import { RootState, persistor } from '../store/store';
 import { styles } from './styles';
-import { resetGame } from '../store/resourceSlice';
+import { resetGame } from '../store/logSlice';
 import FormattedNumber from './formattedNumber';
 
-function ActiveLogs() {
-  const dispatch = useDispatch();
-  const logs = useSelector((state: RootState) => state.logs ? state.logs.logs : []);
-  
-  return (
-    <View style={styles.resourceWrapper}>
-      {logs.map((log) => (
-        <Text key={log.id} style={styles.text}>
-          {log.name}: <FormattedNumber value={log.quantity} />
-        </Text>
-      ))}
-      <Pressable style={styles.button} onPress={() => {
-        persistor.purge().then(() => {
-            dispatch(resetGame());
-        });
-      }}>
-        <Text style={styles.buttonText}>Reset Log</Text>
-      </Pressable>
-    </View>
-  );
-}
+interface Log {
+    id: number;
+    message: string;
+  }
 
-export default ActiveLogs;
+  function ActiveLogs() {
+    const dispatch = useDispatch();
+    const logs = useSelector((state: RootState) => state.logs.logs);
+    console.log('Logs:', logs);
+  
+    return (
+      <View style={styles.resourceWrapper}>
+        <Text style={styles.text}>Log</Text>
+        {logs && logs.map((log: Log) => (
+          <Text key={log.id} style={styles.text}>
+            {log.message}
+          </Text>
+        ))}
+        <button onClick={() => {
+            persistor.purge().then(() => {
+                dispatch(resetGame());
+            });
+            }}>Reset Log</button>
+      </View>
+    );
+  }
+  
+  export default ActiveLogs;
