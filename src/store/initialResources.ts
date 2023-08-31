@@ -12,11 +12,16 @@ export const initialResources: ResourcesState = {
       quantity: 1000,
       requiredUnits: []
     },
-      { id: 'energy',
-      name: 'Energy Production',
-      quantity: 17.02,
-        requiredUnits: []
-    },
+    { id: 'energy',
+    name: 'Energy Production',
+    quantity: 17.02,
+      requiredUnits: []
+  },      
+  { id: 'spaceCapacity',
+  name: 'Space Capacity',
+  quantity: 0,
+    requiredUnits: []
+  },
     { id: 'productionCapacity', 
     name: 'Production Capacity', 
     quantity: 1,

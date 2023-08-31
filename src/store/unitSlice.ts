@@ -12,6 +12,7 @@ export interface Unit {
   quantity: number;
   requiredUnits: Array<{ unitId: string, quantity: number }>;
   level: number;
+  buttonState: string;
   levelCost: number;
   upgrades: Upgrades[];
   attributes: Array<{ name: string, quantity: number }>;
@@ -45,6 +46,12 @@ const unitsSlice = createSlice({
       const unit = state.units.find(unit => unit.id === action.payload);
       if (unit) {
         unit.isVisible = true;
+      }
+    },
+    updateButtonState(state, action: PayloadAction<{ unitId: string, buttonState: string }>) {
+      const unit = state.units.find(unit => unit.id === action.payload.unitId);
+      if (unit) {
+        unit.buttonState = action.payload.buttonState;
       }
     },
     resetGame: (state) => {
@@ -102,5 +109,5 @@ const unitsSlice = createSlice({
   },
 });
 
-export const { updateUnitVisibility, updateUnitQuantity, resetGame, updateUnitLevel, applyUpgrade, updateUpgradeVisibility } = unitsSlice.actions;
+export const { updateUnitVisibility, updateButtonState, updateUnitQuantity, resetGame, updateUnitLevel, applyUpgrade, updateUpgradeVisibility } = unitsSlice.actions;
 export default unitsSlice.reducer;

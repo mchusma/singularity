@@ -26,6 +26,23 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     paddingBottom: 10,
   },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10,
+    borderRadius: 4,
+    marginTop: 10,
+  },
+  disabledButton: {
+    alignItems: 'center',
+    backgroundColor: '#AAAAAA',
+    padding: 10,
+    borderRadius: 4,
+    marginTop: 10,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+  },
   resourceWrapper: {
     borderColor: getRandomLightColor(),
     borderWidth: 1,
