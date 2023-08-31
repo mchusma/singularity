@@ -2,7 +2,21 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import ActiveLogs from '../components/activeLogs';
 
+
 function LogTab() {
+  const [logs, setLogs] = useState([
+    "Mission Command Log",
+  ]);
+
+  const [userInput, setUserInput] = useState('');
+
+  const addNewLog = () => {
+    if (userInput.trim()) {
+      setLogs(prevLogs => [...prevLogs, userInput]);
+      setUserInput('');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ActiveLogs />
