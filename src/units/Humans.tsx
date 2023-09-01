@@ -51,7 +51,7 @@ function Human() {
       <View style={styles.header}>
         <Text style={styles.headerText}>Population</Text>
       </View>
-      <Text style={styles.text}>Humans add productive capacity, used for improvements. Also, humanity = good.</Text>
+      <Text style={styles.text}>Humans add productive capacity.</Text>
       <Text style={styles.boldText}>Production Capacity: {productionCapacity?.quantity}</Text>
       
       <Text style={styles.text}>Humans: <FormattedNumber value={humans?.quantity || 0} /></Text>
