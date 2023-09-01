@@ -96,7 +96,7 @@ export const initialUnits: UnitsState = {
       id: 'human',
       name: 'Humans',
       order: 3,
-      resourceCost: [],
+      resourceCost: [{ resourceId: 'money', quantity: 100 }],
       resourceOutput: [{ resourceId: 'productionCapacity', quantity: 1 }],
       unitCost: [],
       isVisible: true,
@@ -167,7 +167,7 @@ export const initialUnits: UnitsState = {
       buttonState: 'disabled',
       levelCost: 50000,
       requiredUnits: [{ unitId: 'science', quantity: 1 }],
-      attributes: [{ name: 'Efficiency', quantity: 1 }],
+      attributes: [{ name: 'Fossil', quantity: 18.1 },{ name: 'Renewables', quantity: 7.9 },{ name: 'Fission', quantity: 2.6 },{ name: 'Storage', quantity: 0.0001 }],
       upgrades: [
         {
           id: 'energy.solar',
@@ -188,3 +188,5 @@ export const initialUnits: UnitsState = {
     }
   ]
 };
+
+

@@ -28,10 +28,9 @@ function Rocket() {
         <Text style={styles.headerText}>Space</Text>
       </View>
     <Text style={styles.text}>Space is ultimately required to get more land, resources, and ultimately expand humanity. Outputs tonsInSpace and spaceCapacity</Text>
-    <Text style={styles.text}>Space Capacity: {spaceCapacity?.quantity}</Text>
+    <Text style={styles.boldText}>Space Capacity: {spaceCapacity?.quantity}</Text>
     <Text style={styles.text}>Costs: {rocketsBuilt?.resourceCost.map((resource, index) => `${resource.resourceId}: ${resource.quantity}`).join(', ')}</Text>
     <Text style={styles.text}>Outputs: {rocketsBuilt?.resourceOutput.map((resource, index) => `${resource.resourceId}: ${resource.quantity}`).join(', ')}</Text>
-      {/* <Text style={styles.text}>Rocket Level: {rocketsBuilt?.level || 0} | Cost: ${rocketsBuilt?.levelCost || 0}</Text> */}
       <View style={styles.buttonContainer}>
       <Button
   title={`Build ${rocketsBuilt?.name}`}

@@ -6,8 +6,8 @@ import { View, StyleSheet } from 'react-native';
 function ActionTab() {
   return (
     <View style={styles.container}>
-      <ActiveResources />
       <ActiveUnits />
+      <ActiveResources />
     </View>
   );
 }

@@ -7,6 +7,13 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 5
   },
+  boldText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 5
+  },
   header: {
     backgroundColor: '#3F51B5',
     padding: 15,
@@ -28,7 +35,7 @@ export const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
+    backgroundColor: '#4681f4',
     padding: 10,
     borderRadius: 4,
     marginTop: 10,

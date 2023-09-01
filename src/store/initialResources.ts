@@ -1,41 +1,49 @@
-import { ResourcesState } from './resourceSlice';
+import { ResourcesState } from "./resourceSlice";
 
 export const initialResources: ResourcesState = {
-    resources: [
-      { id: 'tonsInSpace',
-        name: 'Tons in Space',
-        quantity: 1000,
-        requiredUnits: []
-      },
-      { id: 'money',
-      name: 'Money',
+  resources: [
+    {
+      id: "tonsInSpace",
+      name: "Tons in Space",
       quantity: 1000,
-      requiredUnits: []
+      requiredUnits: [],
     },
-    { id: 'energy',
-    name: 'Energy Production',
-    quantity: 17.02,
-      requiredUnits: []
-  },      
-  { id: 'spaceCapacity',
-  name: 'Space Capacity',
-  quantity: 0,
-    requiredUnits: []
-  },
-    { id: 'productionCapacity', 
-    name: 'Production Capacity', 
-    quantity: 1,
-      requiredUnits: []
-  },
-  { id: 'lifespan', 
-  name: 'Lifespan', 
-  quantity: 73.4,
-    requiredUnits: []
-},
-    { id: 'land', 
-    name: 'Inhabitable Land', 
-    quantity: 15770000000,
-      requiredUnits: []
-  },
-    ],
-  };
+    { id: "money", name: "Money", quantity: 1000, requiredUnits: [] },
+    {
+      id: "energy",
+      name: "Energy Production",
+      quantity: 17.02,
+      requiredUnits: [],
+    },
+    {
+      id: "spaceCapacity",
+      name: "Space Capacity",
+      quantity: 0,
+      requiredUnits: [],
+    },
+    {
+      id: "productionCapacity",
+      name: "Production Capacity",
+      quantity: 1,
+      requiredUnits: [],
+    },
+    {
+      id: "Biology",
+      name: "Biology",
+      quantity: 0,
+      requiredUnits: [],
+    },
+    {
+      id: "Physics",
+      name: "Physics",
+      quantity: 0,
+      requiredUnits: [],
+    },
+    {
+      id: "Engineering",
+      name: "Engineering",
+      quantity: 0,
+      requiredUnits: [],
+    }
+  ],
+};

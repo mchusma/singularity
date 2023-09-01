@@ -8,6 +8,7 @@ import { buildUnit } from './components/buildUnit';
 import ActiveUpgrades from '../components/activeUpgrades';
 import FormattedNumber from '../components/formattedNumber';
 import AnimatedButton from '../components/animatedButton';
+import { updateResourceQuantity } from '../store/resourceSlice';
 
 interface Unit {
     id: string;
@@ -34,6 +35,17 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
   const tryScience = () => {
     setSelectedAttribute(null);
     setIsRouletteMode(true);
+  
+    if (selectedAttribute) {
+        // Use the attribute name as the resource id
+        const resourceId = selectedAttribute.name;
+        console.log(`Science Selected attribute: ${resourceId}`); // Log the selected attribute
+  
+        // Dispatch the updateResourceQuantity action
+        dispatch(updateResourceQuantity({ resourceId, quantityChange: 2 }));
+    } else {
+        console.log('No attribute selected.'); // Log when no attribute is selected
+    }
   };
 
   // Cycle through attributes when in roulette mode
@@ -49,7 +61,7 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
       setTimeout(() => {
         setIsRouletteMode(false);
         clearInterval(intervalId);
-      }, 5000);
+      }, 3000);
     }
 
     return () => clearInterval(intervalId);

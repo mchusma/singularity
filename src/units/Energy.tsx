@@ -26,7 +26,7 @@ interface Unit {
       <Text style={styles.text}>Energy is used for building things, computation, and more.</Text>
         {energy?.attributes?.map((attribute, index) => (
         <Text key={index} style={styles.text}>
-          {`${attribute.name}: ${attribute.quantity * 100}%`}
+          {`${attribute.name}: ${attribute.quantity}`}PWh
         </Text>
         ))}
         <ActiveUpgrades unitId="energy" />

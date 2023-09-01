@@ -18,10 +18,8 @@ export const buildUnit = (unitId: string) => {
     // Check if there are enough resources to build the unit
     const resourceCosts = unit.resourceCost.map(cost => resources.resources.find((res) => res.id === cost.resourceId));
     for (let i = 0; i < resourceCosts.length; i++) {
-      if (!resourceCosts[i]) {
-        throw new Error("Resource not found.");
-      }
-      if (resourceCosts[i].quantity < unit.resourceCost[i].quantity) {
+      const resourceCost = resourceCosts[i];
+      if (!resourceCost || (resourceCost.quantity < unit.resourceCost[i].quantity)) {
         throw new Error("Not enough resources.");
       }
     }
@@ -29,7 +27,8 @@ export const buildUnit = (unitId: string) => {
     // Check if there are enough units to build the unit
     const unitCosts = unit.unitCost.map(cost => units.units.find((u) => u.id === cost.unitId));
     for (let i = 0; i < unitCosts.length; i++) {
-      if (!unitCosts[i] || unitCosts[i]?.quantity < unit.unitCost[i].quantity) {
+      const unitCost = unitCosts[i];
+      if (!unitCost || unitCost?.quantity < unit.unitCost[i].quantity) {
         throw new Error("Not enough units.");
       }
     }
