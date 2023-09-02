@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native';
 
 interface FormattedNumberProps {
   value: number;
@@ -18,7 +19,7 @@ const FormattedNumber: React.FC<FormattedNumberProps> = ({ value }) => {
   };
 
   return (
-    <>{formatNumber(value)}</>
+    <Text>{formatNumber(value)}</Text>
   );
 };
 

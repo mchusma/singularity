@@ -50,8 +50,7 @@ function Energy() {
       </Text>
       {energy?.attributes?.map((attribute, index) => (
         <Text key={index} style={styles.text}>
-          {`${attribute.name}: ${attribute.quantity}`}PWh
-        </Text>
+        {`${attribute.name}: ${attribute.quantity ? attribute.quantity.toString() : ''} PWh`}        </Text>
       ))}
       <Picker
         selectedValue={selectedAttribute}
@@ -85,7 +84,7 @@ function Energy() {
           }}
           disabled={buttonState === "disabled"}
         >
-          <Text style={styles.buttonText}>Build </Text>
+          <Text style={styles.buttonText}>Build Power Plant</Text>
         </TouchableOpacity>
       </View>
       <ActiveUpgrades unitId="energy" />

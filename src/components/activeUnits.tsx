@@ -8,7 +8,7 @@ import Energy from '../units/Energy';
 import { resetGame, updateUnitVisibility } from '../store/unitSlice';
 import { RootState, persistor } from '../store/store';
 import { Unit } from '../store/unitSlice';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, Button } from 'react-native';
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -68,7 +68,7 @@ const ActiveUnits = () => {
     
     const sortedVisibleUnits = visibleUnitsWithState.sort((a, b) => (a.order || 0) - (b.order || 0)).map(unit => unit.UnitComponent);    
     return (
-        <div>
+        <View>
             <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                 {sortedVisibleUnits.map((Unit, index) => (
                     <View style={{ width: unitWidth, margin: 10 }} key={index}>
@@ -76,12 +76,12 @@ const ActiveUnits = () => {
                     </View>
                 ))}
             </View>
-            <button onClick={() => {
+            <Button title="Reset Log" onPress={() => {
                 persistor.purge().then(() => {
                     dispatch(resetGame());
                 });
-                }}>Reset Units</button>
-        </div>
+            }}/>
+        </View>
     );
 }
 

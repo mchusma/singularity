@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { View, Button, Text } from 'react-native';
-import { RootState } from '../store/store';
-import { updateUnitQuantity } from '../store/unitSlice';
-import { styles } from '../components/styles'; 
-import { buildUnit } from './components/buildUnit';
-import ActiveUpgrades from '../components/activeUpgrades';
-import FormattedNumber from '../components/formattedNumber';
-import AnimatedButton from '../components/animatedButton';
-import { updateResourceQuantity } from '../store/resourceSlice';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { View, Button, Text } from "react-native";
+import { RootState } from "../store/store";
+import { updateUnitQuantity } from "../store/unitSlice";
+import { styles } from "../components/styles";
+import { buildUnit } from "./components/buildUnit";
+import ActiveUpgrades from "../components/activeUpgrades";
+import FormattedNumber from "../components/formattedNumber";
+import AnimatedButton from "../components/animatedButton";
+import { updateResourceQuantity } from "../store/resourceSlice";
 
 interface Unit {
-    id: string;
-    quantity: number;
+  id: string;
+  quantity: number;
 }
 
 interface Attribute {
-    name: string;
-    quantity: number;
+  name: string;
+  quantity: number;
 }
 
 interface ScienceProps {
@@ -26,25 +26,31 @@ interface ScienceProps {
 
 const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
   const dispatch = useDispatch();
-  const unitId = 'science'; 
-  const science = useSelector((state: RootState) => state.units?.units?.find((unit) => unit.id === unitId));
-  const [selectedAttribute, setSelectedAttribute] = useState<Attribute | null>(null);
+  const unitId = "science";
+  const science = useSelector((state: RootState) =>
+    state.units?.units?.find((unit) => unit.id === unitId)
+  );
+  const [selectedAttribute, setSelectedAttribute] = useState<Attribute | null>(
+    null
+  );
   const [isRouletteMode, setIsRouletteMode] = useState<boolean>(true);
-  const selectedIndex = selectedAttribute ? science?.attributes?.indexOf(selectedAttribute) : -1;
+  const selectedIndex = selectedAttribute
+    ? science?.attributes?.indexOf(selectedAttribute)
+    : -1;
 
   const tryScience = () => {
     setSelectedAttribute(null);
     setIsRouletteMode(true);
-  
+
     if (selectedAttribute) {
-        // Use the attribute name as the resource id
-        const resourceId = selectedAttribute.name;
-        console.log(`Science Selected attribute: ${resourceId}`); // Log the selected attribute
-  
-        // Dispatch the updateResourceQuantity action
-        dispatch(updateResourceQuantity({ resourceId, quantityChange: 2 }));
+      // Use the attribute name as the resource id
+      const resourceId = selectedAttribute.name;
+      console.log(`Science Selected attribute: ${resourceId}`); // Log the selected attribute
+
+      // Dispatch the updateResourceQuantity action
+      dispatch(updateResourceQuantity({ resourceId, quantityChange: 2 }));
     } else {
-        console.log('No attribute selected.'); // Log when no attribute is selected
+      console.log("No attribute selected."); // Log when no attribute is selected
     }
   };
 
@@ -53,8 +59,12 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
     let intervalId: NodeJS.Timeout;
     if (isRouletteMode) {
       intervalId = setInterval(() => {
-        const randomIndex = Math.floor(Math.random() * (science?.attributes?.length || 0));
-        setSelectedAttribute(science?.attributes ? science.attributes[randomIndex] : null);
+        const randomIndex = Math.floor(
+          Math.random() * (science?.attributes?.length || 0)
+        );
+        setSelectedAttribute(
+          science?.attributes ? science.attributes[randomIndex] : null
+        );
       }, 100);
 
       // After 5 seconds, select an attribute and disable roulette mode
@@ -80,16 +90,25 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
           ) : (
             <View style={styles.dotPlaceholder} />
           )}
-          <Text style={styles.text}>
-            {`${attribute.name}: ${attribute.quantity} ${!isRouletteMode && attribute.name === selectedAttribute?.name ? '(Selected)' : ''}`}
-          </Text>
+  <Text style={styles.text}>
+  {`${attribute.name}: ${attribute.quantity.toString()} ${
+    !isRouletteMode && attribute.name === selectedAttribute?.name
+      ? "(Selected)"
+      : ""
+  }`}{" "}
+</Text>
         </View>
       ))}
-    <AnimatedButton title="Try Science" onPress={tryScience} disabled={isRouletteMode} />    <ActiveUpgrades unitId="science" />
+      <AnimatedButton
+        title="Try Science"
+        onPress={tryScience}
+        disabled={isRouletteMode}
+      />
+      <ActiveUpgrades unitId="science" />
     </View>
   );
 };
 
-Science.unitName = 'Science';
+Science.unitName = "Science";
 
 export default Science;

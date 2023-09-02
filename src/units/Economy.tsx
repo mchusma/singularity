@@ -86,19 +86,21 @@ function Economy() {
         </Text>
         <Text style={styles.boldText}>Money: {money?.quantity}</Text>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          {unit && Array.isArray(unit?.resourceCost) &&
-            unit.resourceCost.map((resource, index) => (
-              <Text key={index} style={styles.text}>
-                Cost: {resource.quantity} {resource.resourceId}
-              </Text>
-            ))}
+        {unit && Array.isArray(unit?.resourceCost) ? (
+  unit.resourceCost.map((resource, index) => (
+    <Text key={index} style={styles.text}>
+      Cost: {resource.quantity.toString()} {resource.resourceId}
+    </Text>
+  ))
+) : null}
           <Animated.View style={[styles.dot, dotStyle]} />
-          {unit && Array.isArray(unit?.resourceOutput) &&
-            unit.resourceOutput.map((resource, index) => (
-              <Text key={index} style={styles.text}>
-                Output: {resource.quantity} {resource.resourceId}
-              </Text>
-            ))}
+          {unit && Array.isArray(unit?.resourceOutput) ? (
+  unit.resourceOutput.map((resource, index) => (
+    <Text key={index} style={styles.text}>
+      Output: {resource.quantity.toString()} {resource.resourceId}
+    </Text>
+  ))
+) : null}
         </View>
         <View style={styles.buttonContainer}>
         <TouchableOpacity

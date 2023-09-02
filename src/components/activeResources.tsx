@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { RootState, persistor } from '../store/store';
 import { styles } from './styles'; 
 import { resetGame } from '../store/resourceSlice';
@@ -17,11 +17,11 @@ function ActiveResources() {
           {resource.name}: <FormattedNumber value={resource.quantity} />
         </Text>
       ))}
-              <button onClick={() => {
+      <Button title="Reset Log" onPress={() => {
           persistor.purge().then(() => {
               dispatch(resetGame());
           });
-          }}>Reset Resources</button>
+      }}/>
     </View>
   );
 }
