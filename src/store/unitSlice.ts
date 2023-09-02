@@ -77,6 +77,15 @@ const unitsSlice = createSlice({
         console.error('Error in updateUnitLevel reducer:', error);
       }
     },
+    updateAttributeQuantity: (state, action: PayloadAction<{ unitId: string, attributeName: string, quantityChange: number }>) => {
+      const unit = state.units.find(unit => unit.id === action.payload.unitId);
+      if (unit) {
+        const attribute = unit.attributes.find(attr => attr.name === action.payload.attributeName);
+        if (attribute) {
+          attribute.quantity += action.payload.quantityChange;
+        }
+      }
+    },
     applyUpgrade: (state, action: PayloadAction<{ unitId: string, upgradeId: string }>) => {
       const unit = state.units.find(unit => unit.id === action.payload.unitId);
       const upgrade = unit?.upgrades.find(upgrade => upgrade.id === action.payload.upgradeId);
@@ -109,5 +118,5 @@ const unitsSlice = createSlice({
   },
 });
 
-export const { updateUnitVisibility, updateButtonState, updateUnitQuantity, resetGame, updateUnitLevel, applyUpgrade, updateUpgradeVisibility } = unitsSlice.actions;
+export const { updateUnitVisibility, updateAttributeQuantity, updateButtonState, updateUnitQuantity, resetGame, updateUnitLevel, applyUpgrade, updateUpgradeVisibility } = unitsSlice.actions;
 export default unitsSlice.reducer;

@@ -158,7 +158,7 @@ export const initialUnits: UnitsState = {
       id: 'energy',
       name: 'Energy',
       order: 5,
-      resourceCost: [{ resourceId: 'money', quantity: 1000000 }, { resourceId: 'productionCapacity', quantity: 1 }],
+      resourceCost: [{ resourceId: 'money', quantity: 1 }, { resourceId: 'productionCapacity', quantity: 1 }],
       resourceOutput: [{ resourceId: 'energy', quantity: 10 }],
       unitCost: [],
       isVisible: true,
