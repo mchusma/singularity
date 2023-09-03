@@ -18,9 +18,11 @@ function ActiveLogs() {
     <View>
         {logs?.length > 0
           ? logs.map((log: Log) => (
-              <Text key={log.id} style={styles.text}>
-                {log.message}
-              </Text>
+              <View style={styles.logContainer} key={log.id}>
+                <Text style={styles.text}>
+                  {log.message}
+                </Text>
+              </View>
             ))
           : null}
     </View>

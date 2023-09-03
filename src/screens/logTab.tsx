@@ -12,18 +12,35 @@ const LogTab = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    scrollViewRef.current?.scrollToEnd({ animated: true });
+    if (scrollViewRef.current) {
+      setTimeout(
+        () => scrollViewRef.current?.scrollToEnd({ animated: true }),
+        100
+      );
+    }
   }, [logs]);
 
   return (
     <View style={styles.container}>
-      <ScrollView ref={scrollViewRef} style={styles.logTabContainer}>
+      <ScrollView
+        ref={scrollViewRef}
+        onContentSizeChange={() =>
+          scrollViewRef.current?.scrollToEnd({ animated: true })
+        }
+        style={styles.logTabContainer}
+      >
         <ActiveLogs />
       </ScrollView>
-      <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate("SettingsScreen")}>
+      <TouchableOpacity
+        style={styles.settingsButton}
+        onPress={() => navigation.navigate("SettingsScreen")}
+      >
         <Ionicons name="menu-outline" size={24} color="white" />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.floatingButton} onPress={() => navigation.navigate("logFullScreen")}>
+      <TouchableOpacity
+        style={styles.floatingButton}
+        onPress={() => navigation.navigate("logFullScreen")}
+      >
         <Ionicons name="chevron-down-outline" size={24} color="white" />
       </TouchableOpacity>
     </View>
@@ -42,12 +59,12 @@ const styles = StyleSheet.create({
     borderBottomColor: "#808080",
   },
   floatingButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 10,
     bottom: 5,
   },
   settingsButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 10,
     top: 5,
   },
