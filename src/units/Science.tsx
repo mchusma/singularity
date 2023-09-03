@@ -100,7 +100,7 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
         </View>
       ))}
       <AnimatedButton
-        title="Try Science"
+        buttonText="Try Science"
         onPress={tryScience}
         disabled={isRouletteMode}
       />

@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { View, Animated, Text, TouchableOpacity } from "react-native";
+import { View, Animated, Text } from "react-native";
 import { RootState } from "../store/store";
 import { styles } from "../components/styles";
 import { buildUnit } from "./components/buildUnit";
 import ActiveUpgrades from "../components/activeUpgrades";
+import AnimatedButton from "../components/animatedButton";
 
 interface Unit {
   id: string;
@@ -16,7 +17,7 @@ function Economy() {
   const dispatch = useDispatch();
   const unitId = "economy";
   const useBuildUnit = buildUnit("economy");
-  
+
   const money = useSelector((state: RootState) =>
     state.resources.resources.find((res) => res.id === "money")
   );
@@ -24,22 +25,24 @@ function Economy() {
   const unit = useSelector((state: RootState) => {
     return state.units?.units?.find((unit) => unit.id === unitId);
   });
-  
-  const resources = useSelector((state: RootState) => state.resources.resources);
+
+  const resources = useSelector(
+    (state: RootState) => state.resources.resources
+  );
 
   const hasEnoughResources = () => {
     if (!unit?.resourceCost) return "disabled";
-  
+
     for (let cost of unit.resourceCost) {
       const resource = resources.find((res) => res.id === cost.resourceId);
       if (!resource || resource.quantity < cost.quantity) {
         return "disabled";
       }
     }
-  
+
     return "enabled";
   };
-  
+
   const buttonState = hasEnoughResources();
 
   const dotPosition = useRef(new Animated.Value(0)).current;
@@ -86,33 +89,27 @@ function Economy() {
         </Text>
         <Text style={styles.boldText}>Money: {money?.quantity}</Text>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-        {unit && Array.isArray(unit?.resourceCost) ? (
-  unit.resourceCost.map((resource, index) => (
-    <Text key={index} style={styles.text}>
-      Cost: {resource.quantity.toString()} {resource.resourceId}
-    </Text>
-  ))
-) : null}
+          {unit && Array.isArray(unit?.resourceCost)
+            ? unit.resourceCost.map((resource, index) => (
+                <Text key={index} style={styles.text}>
+                  Cost: {resource.quantity.toString()} {resource.resourceId}
+                </Text>
+              ))
+            : null}
           <Animated.View style={[styles.dot, dotStyle]} />
-          {unit && Array.isArray(unit?.resourceOutput) ? (
-  unit.resourceOutput.map((resource, index) => (
-    <Text key={index} style={styles.text}>
-      Output: {resource.quantity.toString()} {resource.resourceId}
-    </Text>
-  ))
-) : null}
+          {unit && Array.isArray(unit?.resourceOutput)
+            ? unit.resourceOutput.map((resource, index) => (
+                <Text key={index} style={styles.text}>
+                  Output: {resource.quantity.toString()} {resource.resourceId}
+                </Text>
+              ))
+            : null}
         </View>
-        <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={
-            buttonState === "disabled" ? styles.disabledButton : styles.button
-          }
+        <AnimatedButton
+          buttonText="Sell Space Capacity"
           onPress={useBuildUnit}
           disabled={buttonState === "disabled"}
-        >
-          <Text style={styles.buttonText}>Sell Space Capacity</Text>
-        </TouchableOpacity>
-        </View>
+        />
         <ActiveUpgrades unitId="economy" />
       </View>
     </View>

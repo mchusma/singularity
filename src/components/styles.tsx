@@ -1,22 +1,25 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
   text: {
     color: '#fff',
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 5
+    marginTop: '2%',
+    marginBottom: '2%',
+    marginLeft: '1%'
   },
   boldText: {
     color: '#fff',
     fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 5
+    marginTop: '2%',
+    marginBottom: '2%',
+    marginLeft: '1%'
   },
   header: {
     backgroundColor: '#3F51B5',
-    padding: 15,
+    padding: '3%',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -26,9 +29,11 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   unitWrapper: {
-    borderColor: getRandomLightColor(),
+    borderColor: "#FFADAD",
     borderWidth: 1,
-    padding: 5
+    padding: '1%',
+    margin: '2%',
+    flex: 1
   },
   buttonContainer: {
     paddingBottom: 10,
@@ -48,10 +53,15 @@ export const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonText: {
+    fontWeight: 'bold',
     color: '#FFFFFF',
   },
+  buttonSecondaryText: {
+    color: '#FFFFFF',
+    paddingTop: 5,
+  },
   resourceWrapper: {
-    borderColor: getRandomLightColor(),
+    borderColor: "#FFADAD",
     borderWidth: 1,
     padding: 5
   },
@@ -74,8 +84,3 @@ export const styles = StyleSheet.create({
     alignItems: 'center', 
   },
 });
-
-function getRandomLightColor() {
-  const colors = ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#A0C4FF', '#BDB2FF', '#FFC6FF'];
-  return colors[Math.floor(Math.random() * colors.length)];
-}

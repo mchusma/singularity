@@ -1,39 +1,57 @@
-import React, { useState } from 'react';
-import { Animated, Button, ButtonProps, TouchableWithoutFeedback } from 'react-native';
+import React, { useState } from "react";
+import { Animated, TouchableOpacity, Text, View } from "react-native";
+import { styles } from "./styles";
 
-const AnimatedButton: React.FC<ButtonProps> = (props) => {
-  const scaleValue = useState(new Animated.Value(1))[0];
+interface AnimatedButtonProps {
+  onPress: () => void;
+  disabled: boolean;
+  buttonText: string;
+  description?: string;
+}
+const AnimatedButton: React.FC<AnimatedButtonProps> = ({
+  onPress,
+  disabled,
+  buttonText,
+  description,
+}) => {
+  const buttonState = disabled ? styles.disabledButton : styles.button;
+  const bounceValue = useState(new Animated.Value(1))[0];
 
   const startAnimation = () => {
-    Animated.timing(scaleValue, {
-      toValue: 0.5, // decrease scale to make it more noticeable
-      duration: 200, // increase duration for a slower animation
-      useNativeDriver: true,
-    }).start();
+    Animated.sequence([
+      Animated.timing(bounceValue, {
+        toValue: 1.07,
+        duration: 50,
+        useNativeDriver: true,
+      }),
+      Animated.timing(bounceValue, {
+        toValue: 1.0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start();
   };
 
-  const endAnimation = () => {
-    Animated.timing(scaleValue, {
-      toValue: 1,
-      duration: 500, // increase duration for a slower animation
-      useNativeDriver: true,
-    }).start();
+  const handlePress = async () => {
+    startAnimation();
+    await onPress();
   };
 
   return (
     <Animated.View
       style={{
-        transform: [{ scale: scaleValue }],
+        transform: [{ scale: bounceValue }],
       }}
     >
-      <TouchableWithoutFeedback
-        onPressIn={startAnimation}
-        onPressOut={endAnimation}
+      <TouchableOpacity
+        style={[buttonState, { margin: 10 }]}
+        onPress={handlePress}
+        disabled={disabled}
       >
-        <Button {...props} />
-      </TouchableWithoutFeedback>
+        <Text style={styles.buttonText}>{buttonText}</Text>
+        {description && <Text style={styles.buttonSecondaryText}>{description}</Text>}
+      </TouchableOpacity>
     </Animated.View>
   );
 };
-
 export default AnimatedButton;

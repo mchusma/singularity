@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native';
 
 function ActionTab() {
   return (
-    <View style={styles.container}>
+    <View style={styles.actionTabContainer}>
       <ActiveUnits />
       <ActiveResources />
     </View>
@@ -13,12 +13,10 @@ function ActionTab() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  actionTabContainer: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#25292e', 
-  },
-  text: {
-    color: '#FFFFFF', 
   },
 });
 

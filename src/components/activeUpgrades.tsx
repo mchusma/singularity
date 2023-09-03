@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { Button, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { updateUpgradeVisibility } from "../store/unitSlice";
 import { upgradeUnit } from "../units/components/upgradeUnit";
 import { addMessage } from "../store/logSlice";
+import AnimatedButton from "./animatedButton";
 
 interface ActiveUpgradesProps {
   unitId: string;
@@ -68,9 +69,10 @@ const ActiveUpgrades: React.FC<ActiveUpgradesProps> = ({ unitId }) => {
         ? upgrades
             .filter((upgrade) => upgrade.isVisible && !upgrade.isApplied)
             .map((upgrade) => (
-              <Button
+              <AnimatedButton
                 key={upgrade.id}
-                title={`${upgrade.name} ${upgrade.description}`}
+                buttonText={upgrade.name}
+                description={upgrade.description}
                 onPress={() => {
                   console.log(
                     `Upgrade attempted. Unit ID: ${unit?.id}, Upgrade ID: ${upgrade.id}, isVisible: ${upgrade.isVisible}, isApplied: ${upgrade.isApplied}`
@@ -81,6 +83,7 @@ const ActiveUpgrades: React.FC<ActiveUpgradesProps> = ({ unitId }) => {
                     addMessage({ id: Date.now(), message: upgrade.log_message })
                   );
                 }}
+                disabled={false}
               />
             ))
         : null}

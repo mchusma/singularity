@@ -1,12 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { View, Button, Text } from "react-native";
+import { View, Text } from "react-native";
 import { RootState } from "../store/store";
-import { updateUnitQuantity, updateUnitLevel } from "../store/unitSlice";
-import { updateResourceQuantity } from "../store/resourceSlice";
 import { styles } from "../components/styles";
 import { buildUnit } from "./components/buildUnit";
 import ActiveUpgrades from "../components/activeUpgrades";
+import AnimatedButton from "../components/animatedButton";
 
 interface Unit {
   id: string;
@@ -62,14 +61,11 @@ function Rocket() {
             : null}
         </Text>
       </View>
-      <View style={styles.buttonContainer}>
-        <Button
-          title={`Build ${rocketsBuilt?.name}`}
-          onPress={() => {
-            useBuildUnit();
-          }}
-        />
-      </View>
+      <AnimatedButton
+        buttonText={`Build ${rocketsBuilt?.name}`}
+        onPress={useBuildUnit}
+        disabled={false} // replace with actual condition if needed
+      />
       <ActiveUpgrades unitId="rocket" />
     </View>
   );

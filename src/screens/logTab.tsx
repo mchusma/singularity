@@ -1,32 +1,32 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { StyleSheet, ScrollView } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 import ActiveLogs from '../components/activeLogs';
 
-function LogTab() {
+const LogTab = () => {
+  const scrollViewRef = useRef<ScrollView | null>(null);
+  const logs = useSelector((state: RootState) => state.logs.logs);
+
+  useEffect(() => {
+    scrollViewRef.current?.scrollToEnd({ animated: true });
+  }, [logs]);
+
   return (
-    <View style={styles.container}>
+    <ScrollView ref={scrollViewRef} style={styles.logTabContainer}>
       <ActiveLogs />
-    </View>
+    </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
+  logTabContainer: {
     flex: 1,
     backgroundColor: '#000000',
     padding: 10,
     borderWidth: 2,
     borderColor: '#FFFFFF',
   },
-  text: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: 'monospace',
-  },
-  cursor: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-  }
 });
 
 export default LogTab;

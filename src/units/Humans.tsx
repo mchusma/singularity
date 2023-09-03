@@ -1,11 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, Text } from "react-native";
 import { RootState } from "../store/store";
 import { styles } from "../components/styles";
 import { buildUnit } from "./components/buildUnit";
 import ActiveUpgrades from "../components/activeUpgrades";
 import FormattedNumber from "../components/formattedNumber";
+import AnimatedButton from "../components/animatedButton";
 
 interface Attribute {
   name: string;
@@ -81,18 +82,12 @@ function Human() {
           % productive - Increases with lifespan and education.
         </Text>
       </View>
+      <AnimatedButton
+        buttonText="Be Productive"
+        onPress={useBuildUnit}
+        disabled={buttonState === "disabled"}
+      />
       <ActiveUpgrades unitId="human" />
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={
-            buttonState === "disabled" ? styles.disabledButton : styles.button
-          }
-          onPress={useBuildUnit}
-          disabled={buttonState === "disabled"}
-        >
-          <Text style={styles.buttonText}>Be Productive</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }

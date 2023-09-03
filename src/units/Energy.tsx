@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { View, Text, TouchableOpacity } from "react-native";
-import { Picker } from "@react-native-picker/picker";
 import { RootState } from "../store/store";
 import { updateAttributeQuantity } from "../store/unitSlice";
 import { styles } from "../components/styles";
-import { buildUnit } from "./components/buildUnit";
 import ActiveUpgrades from "../components/activeUpgrades";
-import FormattedNumber from "../components/formattedNumber";
+import DropDownPicker from 'react-native-dropdown-picker';  
 
 interface Unit {
   id: string;
@@ -39,6 +37,23 @@ function Energy() {
     return "enabled";
   };
   const buttonState = hasEnoughResources();
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = React.useState(
+    energy?.attributes?.map((attribute) => ({
+      label: attribute.name,
+      value: attribute.name,
+    })) || []
+  );
+
+  useEffect(() => {
+    setItems(
+      energy?.attributes?.map((attribute) => ({
+        label: attribute.name,
+        value: attribute.name,
+      })) || []
+    );
+  }, [energy]);
 
   return (
     <View style={styles.unitWrapper}>
@@ -52,20 +67,14 @@ function Energy() {
         <Text key={index} style={styles.text}>
         {`${attribute.name}: ${attribute.quantity ? attribute.quantity.toString() : ''} PWh`}        </Text>
       ))}
-      <Picker
-        selectedValue={selectedAttribute}
-        onValueChange={(itemValue: string, itemIndex: number) =>
-          setSelectedAttribute(itemValue)
-        }
-      >
-        {energy?.attributes?.map((attribute, index) => (
-          <Picker.Item
-            key={index}
-            label={attribute.name}
-            value={attribute.name}
-          />
-        ))}
-      </Picker>
+      <DropDownPicker
+      open={open}
+      value={value}
+      items={items}
+      setOpen={setOpen}
+      setValue={setValue}
+      setItems={setItems}
+    />
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={
