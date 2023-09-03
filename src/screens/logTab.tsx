@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { StyleSheet, ScrollView, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import ActiveLogs from "../components/activeLogs";
@@ -16,23 +16,40 @@ const LogTab = () => {
   }, [logs]);
 
   return (
-    <ScrollView ref={scrollViewRef} style={styles.logTabContainer}>
-      <ActiveLogs />
-      <TouchableOpacity onPress={() => navigation.navigate("logFullScreen")}>
-        {" "}
-        <Ionicons name="expand" size={24} color="white" />
+    <View style={styles.container}>
+      <ScrollView ref={scrollViewRef} style={styles.logTabContainer}>
+        <ActiveLogs />
+      </ScrollView>
+      <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate("SettingsScreen")}>
+        <Ionicons name="menu-outline" size={24} color="white" />
       </TouchableOpacity>
-    </ScrollView>
+      <TouchableOpacity style={styles.floatingButton} onPress={() => navigation.navigate("logFullScreen")}>
+        <Ionicons name="chevron-down-outline" size={24} color="white" />
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   logTabContainer: {
     flex: 1,
     backgroundColor: "#000000",
     padding: 10,
-    borderWidth: 2,
-    borderColor: "#FFFFFF",
+    borderBottomWidth: 2,
+    borderBottomColor: "#808080",
+  },
+  floatingButton: {
+    position: 'absolute',
+    right: 10,
+    bottom: 5,
+  },
+  settingsButton: {
+    position: 'absolute',
+    right: 10,
+    top: 5,
   },
 });
 

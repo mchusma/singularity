@@ -8,8 +8,9 @@ import LogTab from "./src/screens/logTab";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
-import MainScreen from "./src/screens/MainScreen"; // import the MainScreen component
-import logFullScreen from "./src/screens/logFullScreen"; // import the LogFullScreen component
+import MainScreen from "./src/screens/MainScreen"; 
+import logFullScreen from "./src/screens/logFullScreen";
+import SettingsScreen from "./src/screens/settingsScreen";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Main" component={MainScreen} />
             <Stack.Screen name="logFullScreen" component={logFullScreen} />
+            <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PersistGate>
@@ -31,10 +33,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logTab: {
-    flex: 1,
-    maxHeight: 200,
+    flex: 2,
+    maxHeight: 300,
   },
   actionTab: {
-    flex: 9,
+    flex: 8,
   },
 });

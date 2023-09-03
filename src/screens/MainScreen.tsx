@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView, SafeAreaView } from "react-native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "../../src/store/store";
@@ -10,7 +10,9 @@ export default function MainScreen() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <View style={styles.container}>
+      <View style={styles.outerContainer}>
+
+        <SafeAreaView style={styles.container}>
           <View style={styles.logTab}>
             <LogTab />
           </View>
@@ -19,13 +21,18 @@ export default function MainScreen() {
               <ActionTab />
             </ScrollView>
           </View>
-        </View>
+        </SafeAreaView>
+      </View>
       </PersistGate>
     </Provider>
   );
 }
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    flex: 1,
+    backgroundColor: '#282828',
+  },
   container: {
     flex: 1,
   },
