@@ -1,9 +1,8 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { View, Text, Button } from "react-native";
-import { RootState, persistor } from "../store/store";
+import { useSelector } from "react-redux";
+import { View, Text } from "react-native";
+import { RootState } from "../store/store";
 import { styles } from "./styles";
-import { resetGame } from "../store/logSlice";
 
 interface Log {
   id: number;
@@ -11,7 +10,6 @@ interface Log {
 }
 
 function ActiveLogs() {
-  const dispatch = useDispatch();
   const logs = useSelector((state: RootState) => state.logs.logs);
 
   console.log("Logs:", logs);
@@ -25,14 +23,6 @@ function ActiveLogs() {
               </Text>
             ))
           : null}
-      <Button
-        title="Reset Log"
-        onPress={() => {
-          persistor.purge().then(() => {
-            dispatch(resetGame());
-          });
-        }}
-      />
     </View>
   );
 }

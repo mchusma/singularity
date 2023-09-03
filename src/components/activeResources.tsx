@@ -17,7 +17,7 @@ function ActiveResources() {
           {resource.name}: <FormattedNumber value={resource.quantity} />
         </Text>
       ))}
-      <Button title="Reset Log" onPress={() => {
+      <Button title="Reset Resources" onPress={() => {
           persistor.purge().then(() => {
               dispatch(resetGame());
           });
