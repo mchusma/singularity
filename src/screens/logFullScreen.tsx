@@ -38,8 +38,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000000',
     padding: 10,
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
   },
 });
 
