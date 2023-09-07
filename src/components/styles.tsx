@@ -1,4 +1,5 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -88,7 +89,8 @@ export const styles = StyleSheet.create({
     marginTop: '2%',
   },
   unitWrapper: {
-    borderColor: "#FFADAD",
+    borderColor: 'rgb(132, 153, 164)',
+    borderRadius: 10,
     borderWidth: 1,
     flex: 1,
     margin: '2%',

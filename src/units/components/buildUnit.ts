@@ -20,7 +20,7 @@ export const buildUnit = (unitId: string) => {
     for (let i = 0; i < resourceCosts.length; i++) {
       const resourceCost = resourceCosts[i];
       if (!resourceCost || (resourceCost.quantity < unit.resourceCost[i].quantity)) {
-        throw new Error("Not enough resources.");
+        console.log("Not enough resources.");
       }
     }
 
@@ -29,7 +29,7 @@ export const buildUnit = (unitId: string) => {
     for (let i = 0; i < unitCosts.length; i++) {
       const unitCost = unitCosts[i];
       if (!unitCost || unitCost?.quantity < unit.unitCost[i].quantity) {
-        throw new Error("Not enough units.");
+        console.log("Not enough units.");
       }
     }
 

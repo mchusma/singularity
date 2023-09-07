@@ -6,6 +6,7 @@ import { styles } from "../components/styles";
 import { buildUnit } from "./components/buildUnit";
 import ActiveUpgrades from "../components/activeUpgrades";
 import AnimatedButton from "../components/animatedButton";
+import UnitComponent from "../components/unitComponent";
 
 interface Unit {
   id: string;
@@ -16,7 +17,7 @@ interface Unit {
 function Economy() {
   const dispatch = useDispatch();
   const unitId = "economy";
-  const useBuildUnit = buildUnit("economy");
+  const useBuildUnit = buildUnit(unitId);
 
   const money = useSelector((state: RootState) =>
     state.resources.resources.find((res) => res.id === "money")
@@ -43,7 +44,11 @@ function Economy() {
     return "enabled";
   };
 
-  const buttonState = hasEnoughResources();
+  const [buttonState, setButtonState] = React.useState(hasEnoughResources());
+
+  React.useEffect(() => {
+    setButtonState(hasEnoughResources());
+  }, [unit, resources]);
 
   const dotPosition = useRef(new Animated.Value(0)).current;
 
@@ -78,7 +83,7 @@ function Economy() {
   };
 
   return (
-    <View style={styles.unitWrapper}>
+    <UnitComponent unitId={unitId} animateCounter={Math.random()}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Economy</Text>
       </View>
@@ -109,10 +114,11 @@ function Economy() {
           buttonText="Sell Space Capacity"
           onPress={useBuildUnit}
           disabled={buttonState === "disabled"}
+          unitId={unitId}
         />
         <ActiveUpgrades unitId="economy" />
       </View>
-    </View>
+    </UnitComponent>
   );
 }
 

@@ -10,19 +10,18 @@ export default function MainScreen() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-      <View style={styles.outerContainer}>
-
-        <SafeAreaView style={styles.container}>
-          <View style={styles.logTab}>
-            <LogTab />
-          </View>
-          <View style={styles.actionTab}>
-            <ScrollView>
-              <ActionTab />
-            </ScrollView>
-          </View>
-        </SafeAreaView>
-      </View>
+        <View style={styles.outerContainer}>
+          <SafeAreaView style={styles.container}>
+            <View style={styles.logTab}>
+              <LogTab />
+            </View>
+            <View style={styles.actionTab}>
+              <ScrollView>
+                <ActionTab />
+              </ScrollView>
+            </View>
+          </SafeAreaView>
+        </View>
       </PersistGate>
     </Provider>
   );
@@ -31,7 +30,7 @@ export default function MainScreen() {
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    backgroundColor: '#282828',
+    backgroundColor: "#282828",
   },
   container: {
     flex: 1,

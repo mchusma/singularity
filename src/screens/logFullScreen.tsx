@@ -21,7 +21,7 @@ const LogFullScreen = () => {
   }, [logs]);
 
   return (
-    <SafeAreaView  style={styles.logTabContainer}>
+    <SafeAreaView style={styles.logTabContainer}>
       <ScrollView ref={scrollViewRef}>
         <ActiveLogs />
         <Button

@@ -7,6 +7,7 @@ import { buildUnit } from "./components/buildUnit";
 import ActiveUpgrades from "../components/activeUpgrades";
 import FormattedNumber from "../components/formattedNumber";
 import AnimatedButton from "../components/animatedButton";
+import UnitComponent from "../components/unitComponent";
 
 interface Attribute {
   name: string;
@@ -29,14 +30,16 @@ function Human() {
   const resources = useSelector(
     (state: RootState) => state.resources.resources
   );
-  const unit = useSelector((state: RootState) => {
-    return state.units?.units?.find((unit) => unit.id === unitId);
-  });
+
   const productionCapacity = useSelector((state: RootState) =>
     state.resources.resources.find(
       (resource) => resource.id === "productionCapacity"
     )
   );
+
+  const unit = useSelector((state: RootState) => {
+    return state.units?.units?.find((unit) => unit.id === unitId);
+  });
 
   const hasEnoughResources = () => {
     if (!unit?.resourceCost) return "disabled";
@@ -51,10 +54,14 @@ function Human() {
     return "enabled";
   };
 
-  const buttonState = hasEnoughResources();
+  const [buttonState, setButtonState] = React.useState(hasEnoughResources());
+
+  React.useEffect(() => {
+    setButtonState(hasEnoughResources());
+  }, [unit, resources]);
 
   return (
-    <View style={styles.unitWrapper}>
+    <UnitComponent unitId={unitId} animateCounter={Math.random()}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Population</Text>
       </View>
@@ -86,9 +93,10 @@ function Human() {
         buttonText="Be Productive"
         onPress={useBuildUnit}
         disabled={buttonState === "disabled"}
+        unitId={unitId}
       />
       <ActiveUpgrades unitId="human" />
-    </View>
+    </UnitComponent>
   );
 }
 

@@ -1,7 +1,7 @@
-import React from 'react';
-import ActiveUnits from '../components/activeUnits';
-import ActiveResources from '../components/activeResources';
-import { View, StyleSheet } from 'react-native';
+import React from "react";
+import ActiveUnits from "../components/activeUnits";
+import ActiveResources from "../components/activeResources";
+import { View, StyleSheet } from "react-native";
 
 function ActionTab() {
   return (
@@ -15,8 +15,8 @@ function ActionTab() {
 const styles = StyleSheet.create({
   actionTabContainer: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#25292e', 
+    flexDirection: "column",
+    backgroundColor: "#25292e",
   },
 });
 

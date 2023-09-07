@@ -1,11 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { initialResources } from './initialResources';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { initialResources } from "./initialResources";
 
 interface Resource {
   id: string;
   name: string;
   quantity: number;
-  requiredUnits: Array<{ unitId: number, quantity: number }>;
+  requiredUnits: Array<{ unitId: number; quantity: number }>;
 }
 
 export interface ResourcesState {
@@ -13,18 +13,23 @@ export interface ResourcesState {
 }
 
 const resourcesSlice = createSlice({
-  name: 'resources',
+  name: "resources",
   initialState: initialResources,
   reducers: {
-    updateResourceQuantity: (state, action: PayloadAction<{ resourceId: string, quantityChange: number }>) => {
-      const resource = state.resources.find(res => res.id === action.payload.resourceId);
+    updateResourceQuantity: (
+      state,
+      action: PayloadAction<{ resourceId: string; quantityChange: number }>
+    ) => {
+      const resource = state.resources.find(
+        (res) => res.id === action.payload.resourceId
+      );
       if (resource) {
         resource.quantity += action.payload.quantityChange;
       }
     },
     resetGame: (state) => {
-        return initialResources;
-      },
+      return initialResources;
+    },
   },
 });
 

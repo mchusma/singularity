@@ -5,7 +5,9 @@ import { RootState } from "../store/store";
 import { updateAttributeQuantity } from "../store/unitSlice";
 import { styles } from "../components/styles";
 import ActiveUpgrades from "../components/activeUpgrades";
-import DropDownPicker from 'react-native-dropdown-picker';  
+import DropDownPicker from "react-native-dropdown-picker";
+import AnimatedButton from "../components/animatedButton";
+import UnitComponent from "../components/unitComponent";
 
 interface Unit {
   id: string;
@@ -25,6 +27,9 @@ function Energy() {
   const [selectedAttribute, setSelectedAttribute] = React.useState(
     energy?.attributes[0]?.name
   );
+  const unit = useSelector((state: RootState) => {
+    return state.units?.units?.find((unit) => unit.id === unitId);
+  });
   const hasEnoughResources = () => {
     if (!energy?.resourceCost) return "disabled";
     for (let cost of energy.resourceCost) {
@@ -36,7 +41,12 @@ function Energy() {
 
     return "enabled";
   };
-  const buttonState = hasEnoughResources();
+  const [buttonState, setButtonState] = React.useState(hasEnoughResources());
+
+  React.useEffect(() => {
+    setButtonState(hasEnoughResources());
+  }, [unit, resources]);
+
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = React.useState(
@@ -56,7 +66,7 @@ function Energy() {
   }, [energy]);
 
   return (
-    <View style={styles.unitWrapper}>
+    <UnitComponent unitId={unitId} animateCounter={Math.random()}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Energy</Text>
       </View>
@@ -65,39 +75,37 @@ function Energy() {
       </Text>
       {energy?.attributes?.map((attribute, index) => (
         <Text key={index} style={styles.text}>
-        {`${attribute.name}: ${attribute.quantity ? attribute.quantity.toString() : ''} PWh`}        </Text>
+          {`${attribute.name}: ${
+            attribute.quantity ? attribute.quantity.toString() : ""
+          } PWh`}{" "}
+        </Text>
       ))}
       <DropDownPicker
-      open={open}
-      value={value}
-      items={items}
-      setOpen={setOpen}
-      setValue={setValue}
-      setItems={setItems}
-    />
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={
-            buttonState === "disabled" ? styles.disabledButton : styles.button
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+      />
+      <AnimatedButton
+        buttonText="Build Power Plant"
+        onPress={() => {
+          if (selectedAttribute && energy) {
+            dispatch(
+              updateAttributeQuantity({
+                unitId: energy.id,
+                attributeName: selectedAttribute,
+                quantityChange: 1,
+              })
+            );
           }
-          onPress={() => {
-            if (selectedAttribute && energy) {
-              dispatch(
-                updateAttributeQuantity({
-                  unitId: energy.id,
-                  attributeName: selectedAttribute,
-                  quantityChange: 1,
-                })
-              );
-            }
-          }}
-          disabled={buttonState === "disabled"}
-        >
-          <Text style={styles.buttonText}>Build Power Plant</Text>
-        </TouchableOpacity>
-      </View>
+        }}
+        disabled={buttonState === "disabled"}
+        unitId={unitId}
+      />
       <ActiveUpgrades unitId="energy" />
-    </View>
+    </UnitComponent>
   );
 }
 
