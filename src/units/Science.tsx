@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { View, Button, Text } from "react-native";
 import { RootState } from "../store/store";
-import { updateUnitQuantity } from "../store/unitSlice";
+import { updateAttributeQuantity } from "../store/unitSlice";
 import { styles } from "../components/styles";
 import { buildUnit } from "./components/buildUnit";
 import ActiveUpgrades from "../components/activeUpgrades";
 import FormattedNumber from "../components/formattedNumber";
 import AnimatedButton from "../components/animatedButton";
 import { updateResourceQuantity } from "../store/resourceSlice";
+import UnitComponent from "../components/unitComponent";
 
 interface Unit {
   id: string;
@@ -33,6 +34,8 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
   const [selectedAttribute, setSelectedAttribute] = useState<Attribute | null>(
     null
   );
+  const [finalSelectedAttribute, setFinalSelectedAttribute] =
+    useState<Attribute | null>(null);
   const [isRouletteMode, setIsRouletteMode] = useState<boolean>(true);
   const selectedIndex = selectedAttribute
     ? science?.attributes?.indexOf(selectedAttribute)
@@ -41,10 +44,35 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
   const tryScience = () => {
     setSelectedAttribute(null);
     setIsRouletteMode(true);
+  };
 
-    if (selectedAttribute) {
+  // Select the resource from the Redux store
+  const resource = useSelector((state: RootState) =>
+    state.resources?.resources?.find(
+      (resource) => resource.id === selectedAttribute?.name
+    )
+  );
+
+  useEffect(() => {
+    // Check if the resource and attribute exist
+    if (resource && selectedAttribute) {
+      // Dispatch the updateAttributeQuantity action
+      if (science) {
+        dispatch(
+          updateAttributeQuantity({
+            unitId: science.id,
+            attributeName: selectedAttribute.name,
+            quantityChange: resource.quantity - selectedAttribute.quantity,
+          })
+        );
+      }
+    }
+  }, [resource, selectedAttribute]);
+
+  useEffect(() => {
+    if (finalSelectedAttribute) {
       // Use the attribute name as the resource id
-      const resourceId = selectedAttribute.name;
+      const resourceId = finalSelectedAttribute.name;
       console.log(`Science Selected attribute: ${resourceId}`); // Log the selected attribute
 
       // Dispatch the updateResourceQuantity action
@@ -52,7 +80,7 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
     } else {
       console.log("No attribute selected."); // Log when no attribute is selected
     }
-  };
+  }, [finalSelectedAttribute]);
 
   // Cycle through attributes when in roulette mode
   useEffect(() => {
@@ -67,10 +95,13 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
         );
       }, 100);
 
-      // After 5 seconds, select an attribute and disable roulette mode
+      // After 3 seconds, select an attribute and disable roulette mode
       setTimeout(() => {
         setIsRouletteMode(false);
         clearInterval(intervalId);
+        if (selectedAttribute) {
+          setFinalSelectedAttribute(selectedAttribute);
+        }
       }, 3000);
     }
 
@@ -78,7 +109,7 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
   }, [isRouletteMode, science]);
 
   return (
-    <View style={styles.unitWrapper}>
+    <UnitComponent unitId={unitId} animateCounter={Math.random()}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Science</Text>
       </View>
@@ -90,22 +121,23 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
           ) : (
             <View style={styles.dotPlaceholder} />
           )}
-  <Text style={styles.text}>
-  {`${attribute.name}: ${attribute.quantity.toString()} ${
-    !isRouletteMode && attribute.name === selectedAttribute?.name
-      ? "(Selected)"
-      : ""
-  }`}{" "}
-</Text>
+          <Text style={styles.text}>
+            {`${attribute.name}: ${attribute.quantity.toString()} ${
+              !isRouletteMode && attribute.name === selectedAttribute?.name
+                ? "(Selected)"
+                : ""
+            }`}{" "}
+          </Text>
         </View>
       ))}
       <AnimatedButton
         buttonText="Try Science"
         onPress={tryScience}
         disabled={isRouletteMode}
+        unitId={unitId}
       />
       <ActiveUpgrades unitId="science" />
-    </View>
+    </UnitComponent>
   );
 };
 

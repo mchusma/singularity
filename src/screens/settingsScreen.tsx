@@ -1,6 +1,7 @@
-import React from 'react';
-import { View, Text, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React from "react";
+import { StyleSheet, SafeAreaView, Text, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { styles } from "../components/styles";
 
 const SettingsScreen = () => {
   const navigation = useNavigation();
@@ -18,13 +19,16 @@ const SettingsScreen = () => {
   };
 
   return (
-    <View>
-      <Text>This game was made by 2 brothers, with love. We do this for fun, but would appreciate any support!</Text>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.text}>
+        This game was made by 2 brothers, with love. We do this for fun, but
+        would appreciate any support!
+      </Text>
       <Button title="Change Language" onPress={changeLanguage} />
       <Button title="Reset Game" onPress={resetGame} />
       <Button title="Give a Tip" onPress={tipUs} />
       <Button title="Close" onPress={() => navigation.goBack()} />
-    </View>
+    </SafeAreaView>
   );
 };
 

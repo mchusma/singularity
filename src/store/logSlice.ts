@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { initialLogs } from './initialLogs';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { initialLogs } from "./initialLogs";
 
 interface Log {
   id: number;
@@ -11,7 +11,7 @@ export interface LogsState {
 }
 
 const logSlice = createSlice({
-  name: 'log',
+  name: "log",
   initialState: initialLogs,
   reducers: {
     addMessage: (state, action: PayloadAction<Log>) => {

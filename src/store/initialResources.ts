@@ -18,13 +18,13 @@ export const initialResources: ResourcesState = {
     {
       id: "spaceCapacity",
       name: "Space Capacity",
-      quantity: 0,
+      quantity: 10,
       requiredUnits: [],
     },
     {
       id: "productionCapacity",
       name: "Production Capacity",
-      quantity: 1,
+      quantity: 10,
       requiredUnits: [],
     },
     {
