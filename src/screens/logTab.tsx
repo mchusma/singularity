@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logTabContainer: {
-    flex: 1,
+    //flex: 1,
     backgroundColor: "#000000",
-    padding: 10,
+    //padding: 10,
     borderBottomWidth: 2,
     borderBottomColor: "#808080",
   },

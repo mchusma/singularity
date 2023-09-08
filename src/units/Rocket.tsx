@@ -52,10 +52,12 @@ function Rocket() {
   }, [unit, resources]);
 
   return (
-    <UnitComponent unitId={unitId} animateCounter={Math.random()}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Space</Text>
-      </View>
+    <UnitComponent
+      headerText="Space"
+      unitId={unitId}
+      animateCounter={Math.random()}
+      gradientColor="#4d194d"
+    >
       <View>
         <Text style={styles.text}>
           Space is ultimately required to get more land, resources, and

@@ -32,7 +32,7 @@ export interface Upgrades {
   isVisible: boolean;
   isApplied: boolean;
   resourceCostUpdate: Array<{ resourceId: string; quantity: number }>;
-  resourceCost: Array<{ unitId: string; quantity: number }>;
+  resourceCost: Array<{ resourceId: string; quantity: number }>;
   resourceOutputUpdate: Array<{ resourceId: string; quantity: number }>;
   requiredUnits: Array<{ unitId: string; quantity: number }>;
   requiredResources: Array<{ unitId: string; quantity: number }>;

@@ -61,10 +61,13 @@ function Human() {
   }, [unit, resources]);
 
   return (
-    <UnitComponent unitId={unitId} animateCounter={Math.random()}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Population</Text>
-      </View>
+    <UnitComponent
+      headerText="Population"
+      unitId={unitId}
+      animateCounter={Math.random()}
+      gradientColor="#0b525b"
+      fadeOutDuration={3000}
+    >
       <View>
         <Text style={styles.text}>Humans add productive capacity.</Text>
         <Text style={styles.boldText}>

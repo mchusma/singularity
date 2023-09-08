@@ -109,10 +109,12 @@ const Science: React.FC<ScienceProps> & { unitName?: string } = () => {
   }, [isRouletteMode, science]);
 
   return (
-    <UnitComponent unitId={unitId} animateCounter={Math.random()}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Science</Text>
-      </View>
+    <UnitComponent
+      headerText="Science"
+      unitId={unitId}
+      animateCounter={Math.random()}
+      gradientColor="#2d0065"
+    >
       <Text style={styles.text}>Science expands upgrade options.</Text>
       {science?.attributes?.map((attribute, index) => (
         <View key={index} style={styles.row}>

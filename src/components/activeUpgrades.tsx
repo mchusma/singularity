@@ -73,6 +73,7 @@ const ActiveUpgrades: React.FC<ActiveUpgradesProps> = ({ unitId }) => {
                 key={upgrade.id}
                 buttonText={upgrade.name}
                 description={upgrade.description}
+                resourceCost={upgrade.resourceCost}
                 onPress={() => {
                   console.log(
                     `Upgrade attempted. Unit ID: ${unit?.id}, Upgrade ID: ${upgrade.id}, isVisible: ${upgrade.isVisible}, isApplied: ${upgrade.isApplied}`

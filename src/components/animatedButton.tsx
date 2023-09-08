@@ -9,7 +9,8 @@ interface AnimatedButtonProps {
   disabled: boolean;
   buttonText: string;
   description?: string;
-  unitId?: string; // add unitId prop
+  unitId?: string;
+  resourceCost?: Array<{ resourceId: string; quantity: number }>;
 }
 
 const AnimatedButton: React.FC<AnimatedButtonProps> = ({
@@ -17,11 +18,13 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   disabled,
   buttonText,
   description,
-  unitId, // destructure unitId from props
+  unitId,
+  resourceCost,
 }) => {
   const dispatch = useDispatch();
   const buttonState = disabled ? styles.disabledButton : styles.button;
   const bounceValue = useState(new Animated.Value(1))[0];
+  console.log('resourceCost:', resourceCost);
 
   const startAnimation = () => {
     Animated.sequence([
@@ -39,11 +42,11 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   };
 
   const handlePress = async () => {
+    if (unitId) {
+      dispatch(setActiveUnitId(unitId));
+    }
     startAnimation();
     await onPress();
-    if (unitId) {
-      dispatch(setActiveUnitId(unitId)); // dispatch action if unitId is provided
-    }
   };
 
   return (
@@ -61,6 +64,12 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
         {description && (
           <Text style={styles.buttonSecondaryText}>{description}</Text>
         )}
+        {resourceCost &&
+          resourceCost.map((cost, index) => (
+            <Text key={index}>
+              Resource ID: {cost.resourceId}, Quantity: {cost.quantity}
+            </Text>
+          ))}
       </TouchableOpacity>
     </Animated.View>
   );

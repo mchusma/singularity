@@ -66,10 +66,12 @@ function Energy() {
   }, [energy]);
 
   return (
-    <UnitComponent unitId={unitId} animateCounter={Math.random()}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Energy</Text>
-      </View>
+    <UnitComponent
+      headerText="Energy"
+      unitId={unitId}
+      animateCounter={Math.random()}
+      gradientColor="#00406c"
+    >
       <Text style={styles.text}>
         Energy is used for building things, computation, and more.
       </Text>
@@ -80,14 +82,25 @@ function Energy() {
           } PWh`}{" "}
         </Text>
       ))}
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-      />
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 1,
+        }}
+      >
+        <DropDownPicker
+          open={open}
+          value={value}
+          items={items}
+          setOpen={setOpen}
+          setValue={setValue}
+          setItems={setItems}
+          style={{ alignSelf: "center", width: "80%", zIndex: 2000 }} 
+          dropDownContainerStyle={{ zIndex: 2000 }}
+        />
+      </View>
       <AnimatedButton
         buttonText="Build Power Plant"
         onPress={() => {

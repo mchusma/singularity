@@ -83,10 +83,12 @@ function Economy() {
   };
 
   return (
-    <UnitComponent unitId={unitId} animateCounter={Math.random()}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Economy</Text>
-      </View>
+    <UnitComponent
+      headerText="Economy"
+      unitId={unitId}
+      animateCounter={Math.random()}
+      gradientColor="#312244"
+    >
       <View>
         <Text style={styles.text}>
           Space economy generates money, which is required for expansion. This
