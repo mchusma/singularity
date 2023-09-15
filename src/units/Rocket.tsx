@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { View, Text, Animated, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 import { RootState } from "../store/store";
 import { styles } from "../components/styles";
 import { buildUnit } from "./components/buildUnit";
@@ -8,14 +8,7 @@ import ActiveUpgrades from "../components/activeUpgrades";
 import AnimatedButton from "../components/animatedButton";
 import UnitComponent from "../components/unitComponent";
 
-interface Unit {
-  id: string;
-  quantity: number;
-  unitName: string;
-}
-
 function Rocket() {
-  const dispatch = useDispatch();
   const unitId = "rocket";
   const useBuildUnit = buildUnit(unitId);
   const rocketsBuilt = useSelector((state: RootState) =>
@@ -65,25 +58,31 @@ function Rocket() {
           Space Capacity: {spaceCapacity?.quantity.toString()}
         </Text>
         <Text style={styles.text}>
-          Costs:
+          <Text style={styles.subheader}>Costs:</Text>
+          <Text>{'\n'}</Text>
           {rocketsBuilt?.resourceCost
             ? rocketsBuilt.resourceCost.map((resource, index) => (
-                <Text key={index}>
-                  {resource.resourceId}: {resource.quantity.toString()}
-                  {index < rocketsBuilt.resourceCost.length - 1 ? ", " : ""}
+              <>
+                <Text key={index} style={styles.listItem}>
+                  {resource.name}: {resource.quantity.toString()}
                 </Text>
-              ))
+                <Text>{'\n'}</Text>
+              </>
+            ))
             : null}
         </Text>
         <Text style={styles.text}>
-          Outputs:
+          <Text style={styles.subheader}>Outputs:</Text>
+          <Text>{'\n'}</Text>
           {rocketsBuilt?.resourceOutput
             ? rocketsBuilt.resourceOutput.map((resource, index) => (
-                <Text key={index}>
-                  {resource.resourceId}: {resource.quantity.toString()}
-                  {index < rocketsBuilt.resourceOutput.length - 1 ? ", " : ""}
+              <>
+                <Text key={index} style={styles.listItem}>
+                {resource.name}: {resource.quantity.toString()}
                 </Text>
-              ))
+                <Text>{'\n'}</Text>
+              </>
+            ))
             : null}
         </Text>
       </View>
