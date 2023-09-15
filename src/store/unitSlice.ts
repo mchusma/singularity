@@ -5,12 +5,12 @@ export interface Unit {
   id: string;
   name: string;
   order: number;
-  resourceCost: Array<{ resourceId: string; quantity: number }>;
-  resourceOutput: Array<{ resourceId: string; quantity: number }>;
+  resourceCost: Array<{ resourceId: string; name: string; quantity: number }>;
+  resourceOutput: Array<{ resourceId: string; name: string; quantity: number }>;
   unitCost: Array<{ unitId: string; quantity: number }>;
   isVisible: boolean;
   quantity: number;
-  requiredUnits: Array<{ unitId: string; quantity: number }>;
+  requiredUnits: Array<{ unitId: string; name: string; quantity: number }>;
   level: number;
   buttonState: string;
   levelCost: number;
@@ -31,11 +31,11 @@ export interface Upgrades {
   log_message: string;
   isVisible: boolean;
   isApplied: boolean;
-  resourceCostUpdate: Array<{ resourceId: string; quantity: number }>;
-  resourceCost: Array<{ unitId: string; quantity: number }>;
-  resourceOutputUpdate: Array<{ resourceId: string; quantity: number }>;
-  requiredUnits: Array<{ unitId: string; quantity: number }>;
-  requiredResources: Array<{ unitId: string; quantity: number }>;
+  resourceCostUpdate: Array<{ resourceId: string; name: string; quantity: number }>;
+  resourceCost: Array<{ unitId: string; name: string; quantity: number }>;
+  resourceOutputUpdate: Array<{ resourceId: string; name: string; quantity: number }>;
+  requiredUnits: Array<{ unitId: string; name: string; quantity: number }>;
+  requiredResources: Array<{ unitId: string; name: string; quantity: number }>;
 }
 
 const unitsSlice = createSlice({

@@ -92,24 +92,52 @@ function Economy() {
           Space economy generates money, which is required for expansion. This
           takes available space capacity and sells it to the highest bidder.
         </Text>
-        <Text style={styles.boldText}>Money: {money?.quantity}</Text>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={styles.boldText}>Money: ${money?.quantity}</Text>
+        <Text style={styles.text}>
+          <Text style={styles.subheader}>Costs:</Text>
+          <Text>{'\n'}</Text>
+          {unit?.resourceCost
+            ? unit.resourceCost.map((resource, index) => (
+              <>
+                <Text key={index} style={styles.listItem}>
+                  {resource.name}: {resource.quantity.toString()}
+                </Text>
+                <Text>{'\n'}</Text>
+              </>
+            ))
+            : null}
+        </Text>
+        <Text style={styles.text}>
+          <Text style={styles.subheader}>Outputs:</Text>
+          <Text>{'\n'}</Text>
+          {unit?.resourceOutput
+            ? unit.resourceOutput.map((resource, index) => (
+              <>
+                <Text key={index} style={styles.listItem}>
+                  {resource.name}: {resource.quantity.toString()}
+                </Text>
+                <Text>{'\n'}</Text>
+              </>
+            ))
+            : null}
+        </Text>
+        {/* <View style={{ flexDirection: "row", alignItems: "center" }}>
           {unit && Array.isArray(unit?.resourceCost)
             ? unit.resourceCost.map((resource, index) => (
-                <Text key={index} style={styles.text}>
-                  Cost: {resource.quantity.toString()} {resource.resourceId}
-                </Text>
-              ))
+              <Text key={index} style={styles.text}>
+                Cost: {resource.quantity.toString()} {resource.name}
+              </Text>
+            ))
             : null}
           <Animated.View style={[styles.dot, dotStyle]} />
           {unit && Array.isArray(unit?.resourceOutput)
             ? unit.resourceOutput.map((resource, index) => (
-                <Text key={index} style={styles.text}>
-                  Output: {resource.quantity.toString()} {resource.resourceId}
-                </Text>
-              ))
+              <Text key={index} style={styles.text}>
+                Output: {resource.quantity.toString()} {resource.name}
+              </Text>
+            ))
             : null}
-        </View>
+        </View> */}
         <AnimatedButton
           buttonText="Sell Space Capacity"
           onPress={useBuildUnit}

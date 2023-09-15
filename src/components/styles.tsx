@@ -67,6 +67,10 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  subheader: {
+    fontWeight: 'bold',  // Makes the text bold
+    fontSize: 16,        // Increase font size (or any size you prefer)
+  },
   logContainer: {
     alignSelf: 'flex-start',
     borderBottomColor: '#333',
@@ -95,5 +99,11 @@ export const styles = StyleSheet.create({
     flex: 1,
     margin: '2%',
     padding: '1%',
+  },
+  listItem: {
+    color: '#fff',
+    marginBottom: '2%',
+    marginLeft: '2%',
+    marginTop: '2%',
   },
 });

@@ -32,6 +32,7 @@ const ActiveUnits = () => {
         if (!unit.isVisible) {
           interface RequiredUnit {
             unitId: string;
+            name: string;
             quantity: number;
           }
           const requirementsMet = unit.requiredUnits.every(
