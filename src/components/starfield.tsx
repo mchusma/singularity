@@ -28,7 +28,7 @@ const Star = ({ layout }: { layout: Layout }) => {
     const animationLoop = Animated.loop(
       Animated.timing(animation, {
         toValue: endValue,
-        duration: Math.random() * 5000000 + 100000,
+        duration: Math.random() * 5000000 + 50000,
         useNativeDriver: true,
         easing: Easing.linear,
       }),
