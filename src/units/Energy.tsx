@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { View, Text, TouchableOpacity } from "react-native";
 import { RootState } from "../store/store";
+import { buildUnit } from "./components/buildUnit";
+
 import { updateAttributeQuantity } from "../store/unitSlice";
 import { styles } from "../components/styles";
 import ActiveUpgrades from "../components/activeUpgrades";
@@ -18,12 +20,18 @@ interface Unit {
 function Energy() {
   const dispatch = useDispatch();
   const unitId = "energy";
+
   const resources = useSelector(
     (state: RootState) => state.resources.resources
   );
   const energy = useSelector((state: RootState) =>
     state.units?.units?.find((unit) => unit.id === unitId)
   );
+  const energyResource = useSelector((state: RootState) =>
+    state.resources.resources.find((resource) => resource.id === "energy")
+  );
+  const useBuildUnit = buildUnit(unitId);
+
   const [selectedAttribute, setSelectedAttribute] = React.useState(
     energy?.attributes[0]?.name
   );
@@ -72,48 +80,37 @@ function Energy() {
       animateCounter={Math.random()}
       gradientColor="#00406c"
     >
-      <Text style={styles.text}>
-        Energy is used for building things, computation, and more.
-      </Text>
-      {energy?.attributes?.map((attribute, index) => (
-        <Text key={index} style={styles.text}>
-          {`${attribute.name}: ${
-            attribute.quantity ? attribute.quantity.toString() : ""
-          } PWh`}{" "}
+      <View>
+        <Text style={styles.text}>Energy does stuff.</Text>
+        <Text style={styles.boldText}>
+          Energy: {energyResource?.quantity.toString()}
         </Text>
-      ))}
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 1,
-        }}
-      >
-        <DropDownPicker
-          open={open}
-          value={value}
-          items={items}
-          setOpen={setOpen}
-          setValue={setValue}
-          setItems={setItems}
-          style={{ alignSelf: "center", width: "80%", zIndex: 2000 }} 
-          dropDownContainerStyle={{ zIndex: 2000 }}
-        />
+        <Text style={styles.text}>
+          Costs:
+          {energy?.resourceCost
+            ? energy.resourceCost.map((resource, index) => (
+                <Text key={index}>
+                  {resource.resourceId}: {resource.quantity.toString()}
+                  {index < energy.resourceCost.length - 1 ? ", " : ""}
+                </Text>
+              ))
+            : null}
+        </Text>
+        <Text style={styles.text}>
+          Outputs:
+          {energy?.resourceOutput
+            ? energy.resourceOutput.map((resource, index) => (
+                <Text key={index}>
+                  {resource.resourceId}: {resource.quantity.toString()}
+                  {index < energy.resourceOutput.length - 1 ? ", " : ""}
+                </Text>
+              ))
+            : null}
+        </Text>
       </View>
       <AnimatedButton
-        buttonText="Build Power Plant"
-        onPress={() => {
-          if (selectedAttribute && energy) {
-            dispatch(
-              updateAttributeQuantity({
-                unitId: energy.id,
-                attributeName: selectedAttribute,
-                quantityChange: 1,
-              })
-            );
-          }
-        }}
+        buttonText="Energize"
+        onPress={useBuildUnit}
         disabled={buttonState === "disabled"}
         unitId={unitId}
       />

@@ -21,8 +21,8 @@ function Rocket() {
   const rocketsBuilt = useSelector((state: RootState) =>
     state.units?.units?.find((unit) => unit.id === unitId)
   );
-  const spaceCapacity = useSelector((state: RootState) =>
-    state.resources.resources.find((res) => res.id === "spaceCapacity")
+  const space = useSelector((state: RootState) =>
+    state.resources.resources.find((res) => res.id === "space")
   );
   const resources = useSelector(
     (state: RootState) => state.resources.resources
@@ -61,10 +61,10 @@ function Rocket() {
       <View>
         <Text style={styles.text}>
           Space is ultimately required to get more land, resources, and
-          ultimately expand humanity. Outputs tonsInSpace and spaceCapacity
+          ultimately expand humanity. Outputs tonsInSpace and space
         </Text>
         <Text style={styles.boldText}>
-          Space Capacity: {spaceCapacity?.quantity.toString()}
+          Space Capacity: {space?.quantity.toString()}
         </Text>
         <Text style={styles.text}>
           Costs:

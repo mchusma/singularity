@@ -5,26 +5,31 @@ export const initialResources: ResourcesState = {
     {
       id: "tonsInSpace",
       name: "Tons in Space",
-      quantity: 1000,
+      quantity: 0,
       requiredUnits: [],
     },
-    { id: "money", name: "Money", quantity: 1000, requiredUnits: [] },
+    {
+      id: "money",
+      name: "Money",
+      quantity: 22,
+      requiredUnits: [],
+    },
     {
       id: "energy",
-      name: "Energy Production",
-      quantity: 17.02,
+      name: "Energy",
+      quantity: 22,
       requiredUnits: [],
     },
     {
-      id: "spaceCapacity",
-      name: "Space Capacity",
-      quantity: 10,
+      id: "space",
+      name: "Space",
+      quantity: 0,
       requiredUnits: [],
     },
     {
-      id: "productionCapacity",
-      name: "Production Capacity",
-      quantity: 10,
+      id: "production",
+      name: "Production",
+      quantity: 22,
       requiredUnits: [],
     },
     {
@@ -44,6 +49,6 @@ export const initialResources: ResourcesState = {
       name: "Engineering",
       quantity: 0,
       requiredUnits: [],
-    }
+    },
   ],
 };

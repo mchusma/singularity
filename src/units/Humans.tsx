@@ -31,10 +31,8 @@ function Human() {
     (state: RootState) => state.resources.resources
   );
 
-  const productionCapacity = useSelector((state: RootState) =>
-    state.resources.resources.find(
-      (resource) => resource.id === "productionCapacity"
-    )
+  const production = useSelector((state: RootState) =>
+    state.resources.resources.find((resource) => resource.id === "production")
   );
 
   const unit = useSelector((state: RootState) => {
@@ -69,27 +67,33 @@ function Human() {
       fadeOutDuration={3000}
     >
       <View>
-        <Text style={styles.text}>Humans add productive capacity.</Text>
+        <Text style={styles.text}>
+          Humans do stuff.
+        </Text>
         <Text style={styles.boldText}>
-          Production Capacity: {productionCapacity?.quantity.toString()}
-        </Text>
-
-        <Text style={styles.text}>
-          Humans: <FormattedNumber value={humans?.quantity || 0} />
-        </Text>
-        {humans?.attributes &&
-          humans.attributes.map((attribute, index) => (
-            <Text key={index} style={styles.text}>
-              {attribute.name}: <FormattedNumber value={attribute.quantity} />
-            </Text>
-          ))}
-        <Text style={styles.text}>
-          Population growth rate (1.1% currently) - Humans growth rate grows in
-          proportion to land, inspiration, energy, lifespan. Decreases with
-          education.
+          Production: {production?.quantity.toString()}
         </Text>
         <Text style={styles.text}>
-          % productive - Increases with lifespan and education.
+          Costs:
+          {humans?.resourceCost
+            ? humans.resourceCost.map((resource, index) => (
+                <Text key={index}>
+                  {resource.resourceId}: {resource.quantity.toString()}
+                  {index < humans.resourceCost.length - 1 ? ", " : ""}
+                </Text>
+              ))
+            : null}
+        </Text>
+        <Text style={styles.text}>
+          Outputs:
+          {humans?.resourceOutput
+            ? humans.resourceOutput.map((resource, index) => (
+                <Text key={index}>
+                  {resource.resourceId}: {resource.quantity.toString()}
+                  {index < humans.resourceOutput.length - 1 ? ", " : ""}
+                </Text>
+              ))
+            : null}
         </Text>
       </View>
       <AnimatedButton
